@@ -1,4 +1,4 @@
-##### Course Plan 1.11.2018
+### Course Plan 1.11.2018
 
 * Introduction: Meet and Greet
 * Syllabus Introduction and discussion
