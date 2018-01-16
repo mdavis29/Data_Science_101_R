@@ -16,6 +16,7 @@
   + Imputing: filling a missing value with something else, often the median
   
 Slides at 
+https://edumine.wordpress.com/2014/08/15/data-pre-processing-with-weka-part-1/
 https://www.cs.waikato.ac.nz/~ml/weka/book.html
 
 * Basic Data Cleaning 
