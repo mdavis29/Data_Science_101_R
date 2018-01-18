@@ -39,7 +39,7 @@ https://www.cs.waikato.ac.nz/~ml/weka/book.html
 
 
 #### Course Plan Week 2 Day 2
-
+Chapter 4 Data Mining
   + Cytoscape Netowk Demo
   + Review Data Cleaning
   + 1R Rule Learning on play tennis
