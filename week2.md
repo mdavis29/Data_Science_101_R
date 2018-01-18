@@ -43,7 +43,8 @@ https://www.cs.waikato.ac.nz/~ml/weka/book.html
   + Cytoscape Netowk Demo
   + Review Data Cleaning
   + 1R Rule Learning on play tennis
-  + Nieve Bayes on tennis
+  + Probability Density Function
+  + Nieve Bayes on tennis (if there is time)
 
 
 #### Homework Week2
@@ -51,7 +52,7 @@ https://www.cs.waikato.ac.nz/~ml/weka/book.html
 Due first class of next week (week 3)
 
   * Find and read artical to share detailing how data science was used to solve a problem in your particular field of interest
-  * Use the titanic data set with weka decision trees or rules to find the pasenger types that would have most likely survived.  Write a paragraph on your method and what you found.
+  * Use the titanic data set with weka decision trees or rules to find the pasenger types that would have most likely survived.  Write a paragraph on your method and what you found, as if you were explaining to your supervisor what the signifcant patterns in the data and how you used particular methods to find them.
 
 
 
