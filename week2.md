@@ -40,7 +40,10 @@ https://www.cs.waikato.ac.nz/~ml/weka/book.html
 
 #### Course Plan Week 2 Day 2
 
-TBD 
+  + Cytoscape Netowk Demo
+  + Review Data Cleaning
+  + 1R Rule Learning on play tennis
+  + Nieve Bayes on tennis
 
 
 #### Homework Week2
