@@ -1,5 +1,11 @@
 #### Course Plan Week 3 Day 1
  
+watch Democratizing AI
+  
+  
+
+#### Course Plan Week 3 Day 2
+ 
   * Data Science Artical Discussions
   * review 1r and bayes learners
   * Introduction to Information Gain, entropy and Decision Trees
@@ -9,14 +15,6 @@
   * getting data from UCI Machine Learning repositoy
   https://archive.ics.uci.edu/ml/index.php
   
-  
-
-#### Course Plan Week 3 Day 2
-  
-  * Association Learners
-  more to come.
-
-
 #### Homework
 
   * Choose and download a classification dataset from UCI Machine Repo or form Kaggle.
