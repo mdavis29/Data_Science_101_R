@@ -13,12 +13,12 @@
     + Leave on out validation
     + Stratification
 
-#### Course Plan Week 3 Day 2
+#### Course Plan Week 4 Day 2
   
   * Un superivised Methods with Weka:
-    + Clustering with kmeans and EM
-    + Association learning
- 
+    + Clustering with kmeans
+      + Use Cases
+      + Only Numeric data
 #### Homework
   + Image the the Mayor of Chicago has tasked you with using big data to reduce the crime rate in Chicago
   + Use 2018 Chicago Crime Data set to find cluster to find crime hotspots. 
