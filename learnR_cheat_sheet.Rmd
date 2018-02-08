@@ -1,0 +1,189 @@
+---
+title: "Introduction to R"
+author: "Matthew Davis"
+date: "October 20, 2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+#### Introduction to R
+
+* R is an interpreted language  and can be backed by c++ or Java
+* Most popular statistical computing language in the world
+* Can create graphics, paper, update databases, predict the future
+* Open source language with robust online support and package development 
+* Used by everyone from bio stats researchers to big tech
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = '', warning = FALSE, message = FALSE, fig.width = 3, fig.height = 3)
+```
+
+This document is intended to be a cheat sheet for R basics.
+
+#### Data Types
+
+```{r}
+## vector all integer, numeric, character or factor 
+## use factor vector for catagorical data
+## Vectors are ordered
+print(c(1,2,3,4))
+print(c('a','b'))
+
+## data frame columns are vectors (basically a spreadsheet)
+print(data.frame(x = c('a', 'b'),y =c(1,2)))
+
+## matrix all the same data type
+print(matrix(0,ncol =2, nrow =2))
+
+```
+
+Selecting rows and columns and filter
+```{r, eval=FALSE}
+# Vectors
+x = [1:10] # create a vector of integers 1 to 10
+x[2] # get the second item of the vector
+x[x>4] # get the items in the vector when they are larger than 4 
+x[order(x, decreasing = TRUE)]  # re order x 
+
+# data frames
+data(mtcars) # load mtcars
+mtcars[,1:10] # select the first 10 rows of mtcars
+mtcars[1:2, ] # select the first 2 columns of mtcars
+mtcars[,c('mpg', 'cyl')] # select only the mpg and cylndar columns
+mtcars[mtcars[, 'cyl'] ==6, ] # select only rows with cars that have 6 cylindars
+
+# list have order, and contain about anything
+l = list(x = 1:10, y = 10:24)
+l[[1]] # get the values for the first time in the list
+l[['x']]# get the values for x time in the list
+```
+
+
+
+##### Libraries
+the library contains packages are essentially files containing functions 'set of instructions' and classes 'containers for storing data'. There is an enormous repository available from CRAN  https://cran.r-project.org/
+```{r}
+#install.packages('rpart') ## installs a packge from CRAN
+library(rpart) ## load a package
+detach(package:rpart, unload = TRUE) ## unload a package
+```
+
+
+#### Read and Write csv files
+As a note, there lots of parameters for reading in csv to try there are errors reading it in
+```{r}
+data(mtcars)
+write.csv(mtcars, file = 'mtcars.csv')
+newdata = read.csv('mtcars.csv')
+head(newdata,2)[1:4]
+```
+
+#### Read and Write excel files
+
+R reads only one sheet at a time, if you want to read more, use a for loop.  This reads data in as a data frame will have trouble with excel sheets that have graphics or mixed data types
+```{r}
+library(xlsx)
+data(mtcars)
+write.xlsx(mtcars, file = 'mtcars.xlsx')
+newdata = read.xlsx('mtcars.xlsx', 1)  ## reads sheet 1
+head(newdata,2)[1:4]
+```
+
+#### Save an R Object and load
+
+```{r, eval = FALSE}
+load('data.rda')  ## loads the object as rd in env (doesn't use file name for variable name)
+save(data, file = 'data.rda')
+```
+
+
+
+##### Connect to a Database 
+
+It's worth setting up a Windows Data Source Name (DSN) if you are going to do this, so simplify the connection string
+Also, check in windows data sources to see what odbc drivers are available, if {SQL Server} doesn't work out of the gate.  As a side note, sql server will not connect via odbc from a non-clinician machine
+```{r, eval = FALSE}
+library(RODBC)
+### if you set of a DNS, the con<-odbcConnect('dsn')
+conString <-'Driver={SQL Server};
+              Server=server_name;
+              Database=data_base_name;
+              Trusted_Connection=Yes;'
+con<-odbcDriverConnect(conString)
+querryString = ''
+data = sqlQuery(con, querryString)
+    odbcClose(con)
+```
+
+```{r, fig.width = 6, fig.height = 3}
+data(mtcars)
+summary(mtcars[,c(1,2)]) #summarize data
+str(mtcars) # look at underlying stucture of data
+```
+
+#### Working with Data Frames
+
+These are basic examples of how to subset,
+aggregate pivot and un pivot data in a data frame
+
+```{r, eval = FALSE}
+library(reshape)
+aggregate(mtcars,by=list(mtcars[,'cyl']), FUN = mean) #  aggregate
+melt(mtcars, id.vars = c('cyl'))  # melt columns
+cast(melt(mtcars, id.vars = c('cyl')), value = 'value', fun.aggregate=mean ) # cast ie pivot
+
+````
+
+#### Basic System Utilties
+
+```{r, eval = FALSE}
+ls()##list all varaibles in environment
+list.files() ## list  all files in a working directory
+getwd() ## show your working directory
+setwd() ## set you working directory
+rm() ## remove a variable
+rm(list= ls()) ## remove all varabiles in enviroment
+class() ## show what type of object
+save.image() ## run this to save your enviroment, will open next time you open the project. 
+```
+
+#### Plot Methods
+```{r, fig.width=3, fig.height=3}
+plot(mtcars$mpg, mtcars$hp) # scatter plot
+barplot(mtcars$mpg[1:10],names.arg = rownames(mtcars)[1:10], horiz = TRUE, las=1)
+```
+
+#### Linear Regression
+```{r}
+data(mtcars)
+f = formula(mpg~hp)
+fit = glm(f, mtcars, family='gaussian')
+# reference levels
+f = formula(mpg~factor(cyl))
+fit = glm(f, mtcars, family='gaussian')
+
+plot(x = mtcars$mpg, predict(fit, mtcars), xlab = 'acutals', ylab = 'predictions')
+abline(0,1, col = 'red')
+
+# basic metrics 
+MLmetrics::MAE(mtcars$mpg, predict(fit, mtcars))
+MLmetrics::R2_Score(mtcars$mpg, predict(fit, mtcars))
+MLmetrics::RMSE(mtcars$mpg, predict(fit, mtcars))
+
+```
+
+#### Want to Learn More?
+
+Get R to teach you how to program it. 
+I can't recommend this enough.  It a program written in R to teach you how to program R 
+```{r, eval = FALSE}
+install.packages('swirl')
+library(swirl)
+swirl()
+```
+
+Don't google yourself over the edge or start cursing at stackoverflow. 
+
+* https://www.statmethods.net/ All Things stats and R and nicely organized
+* https://www.r-bloggers.com/ not very organized, but full of information
+* https://www.coursera.org/learn/r-programming free course, cheap if you want a certificate
