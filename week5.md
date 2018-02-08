@@ -32,8 +32,7 @@ Install R studio Desktop (Free Edition)
 https://www.rstudio.com/products/rstudio/download/#download
 install swirl in R
 completes swirl basic R programming 1-7
-Due by next week tuesday ( nothing to be collected)
-
+Answer the assignment questions on R programming in oaks.
 
 
 
