@@ -22,8 +22,8 @@
     * refernce levels
     * outliers
     * plots
-    * Metrics R2, MAE, RMSE 
-    
+    * Metrics R2, MAE, RMSE
+     
   http://www.statisticssolutions.com/assumptions-of-linear-regression/
 
 #### Homework
