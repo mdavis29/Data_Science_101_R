@@ -9,7 +9,7 @@
     
   * Review Linear Models (basic)
   * No Intercept Regression Models
-  * Linear models with factor levels
+  * Linear models with factor levels and releveing
   * GLM  Regression families 
   * reference levels in linear models
   * plotting results with basic plot methods. 
@@ -23,7 +23,8 @@
   
 #### Homework
   + SWIRL Basic R Programming section 9, 10, 12, 14, 15
-  + create a linear model with mtcars to predict mpg with hp and wt and am as indedendent variables.
+  + find a dataset in the fivethirtyeight package and create linear models to explain variables
+  and answer interesting questions.
   + create a plot showing predicted vs actual with a re line of slope 1, intercept 0 to demonstrate model performance.
   + create a density plot of the residuals of the model to show that they are normally distributed
  + upload a single doc with the code and graphics to oaks.
