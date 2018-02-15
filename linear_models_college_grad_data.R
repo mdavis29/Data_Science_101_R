@@ -7,17 +7,23 @@ d = college_recent_grads
 # show the power of wieghts
 # do woman make more than men? Acutal does the % of women in the major predict the median wage
 fit<-glm(median~sharewomen, d, family = 'gaussian')
-fit<-glm(median~sharewomen, d, weights = d$sample_size, family = 'gaussian')
+fit<-glm(median~sharewomen, d, weights = d$total, family = 'gaussian')
 
 # what is the most value able major
 head(d[order(d$median),])
 tail(d[order(d$median),])
 
 
-fit<-glm(median~ major_category , d, weights = d$sample_size, family = 'gaussian')
+c
 #  relever
 d$major_category = as.factor(d$major_category)
 d$major_category = relevel(d$major_category, ref  = 'Computers & Mathematics')
 
 
 fit<-glm(median~ major_category , d, weights = d$sample_size, family = 'gaussian')
+
+
+# create a plot
+qplot(d$median, predict(fit, d), label = substr(d$major_category,1,10), geom = 'text', 
+      log = c('x','y'))
+ 

@@ -8,6 +8,7 @@
     + Subsetting
     
   * Review Linear Models (basic)
+  * Regression model preformance
   * No Intercept Regression Models
   * Linear models with factor levels and releveing
   * GLM  Regression families 
@@ -17,6 +18,9 @@
 #### Course Plan Week 6 Day 2
   * Review linear regression with factor levels
   * logistict Regression
+  
+http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/how-to/binary-logistic-regression/interpret-the-results/key-results/
+
   * interpriation
   * Model Preformance
   * plotting results with basic plot methods 
