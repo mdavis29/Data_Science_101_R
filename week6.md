@@ -17,7 +17,10 @@
   
 #### Course Plan Week 6 Day 2
   * Review linear regression with factor levels
+  http://www.cazaar.com/ta/econ113/interpreting-beta
   * logistict Regression
+  * exp(coef(x)) (gives you eβ, the multiplicative change in the odds ratio for y=1
+  * curve fitting for contious inpendent variables
   
 http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/how-to/binary-logistic-regression/interpret-the-results/key-results/
 
