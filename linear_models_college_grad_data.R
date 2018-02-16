@@ -52,6 +52,49 @@ data("steak_survey")
 d = steak_survey
 d$gam01 = ifelse(d$gamble, 1,0)
 
-fit<-glm(gam01~skydiving+cheated +hhold_income, d, family = 'binomial')
+
+
+fit<-glm(gam01~skydiving, d, family = 'binomial')
+
+
+
+
+fit<-glm(gam01~skydiving:cheated, d, family = 'binomial')
+
+
+
 exp(coef(fit)[6])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
