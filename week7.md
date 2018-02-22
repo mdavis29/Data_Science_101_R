@@ -9,14 +9,10 @@
     + tuning selectio
 
 #### Course Plan Week 6 Day 2
-  * R Markdowns
-  * Plotting with GGPLOT
+  * Kaggle Comp In Class Project
   
 #### Homework
- create a R HTML Mark down upload to oaks.
- The markdown should include:
-  + preprocessing using caret
-  + splitting using caret
-  + parameter tuning using caret
-  + visualition of the model performance
-  
+If not completed as part of a group in class:,
+ enter Titanic kaggle comp.
+ upload a screen shot of the ranking of you submission to oaks.
+ due next week.
