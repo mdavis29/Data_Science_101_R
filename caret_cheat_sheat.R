@@ -1,4 +1,4 @@
-### Machine Learning with Caret
+getw### Machine Learning with Caret
 # get data
 library(caret)
 library(fivethirtyeight)
@@ -11,7 +11,7 @@ test.set  <- read.csv("test.csv",  stringsAsFactors=TRUE)
 target = "Survived"
 xvars = c('Fare', 'SibSp', 'Parch', 'Age')
 # create one hot encoder dummy variables
-dmv = dummyVars(~Sex +Embarked +Pclass,train )
+dmv = dummyVars(~Sex +Embarked +Pclass,train.set )
 pp = preProcess(train.set[,xvars], method = 'medianImpute')
 
 
@@ -28,6 +28,9 @@ to_train = data.frame(create_features(train.set, xvars, dmv, pp),
                       Class = as.factor(train[, target]))
 levels(to_train$Class) = c('d', 's')
 
+
+
+
 # create cntroller
 ctr <- trainControl(
                   method = "cv",
@@ -40,7 +43,6 @@ ctr <- trainControl(
 fit = train(Class~., 
             data = to_train,
             method = 'rpart',
-            preProcess = 'medianImpute',
             trControl = ctr,
             tuneLength = 5
             )

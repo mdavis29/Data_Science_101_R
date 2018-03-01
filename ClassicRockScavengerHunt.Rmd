@@ -1,0 +1,41 @@
+---
+title: "Data Scavenger Hunt"
+author: "Matthew Davis"
+date: "March 1, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Data Scavenger Hunt.
+
+Rules:  
+
++ Answers must be results from R code in mark down form:
++ R code must generate the awnsers
++ Output is an html file to upload to oaks via R markdown.
+Answers should included the code used to generate.
++ work must be your own by you are encouraged to work in groups
+
+##### Q1 Which aritist has the song with highest play count for all songs?
+
+##### Q2 Which year had the highest average play count?
+
+##### Q3  Find the artists with the most songs
+
+##### Q4  Find the year the Led Zeppelin released the most songs?
+
+##### Q4 Find the one hit wonder artist with the largest play count for a single song
+
+##### Q5  Find the list of the most repeated song names
+
+##### Q6  Of the most repeated song names, figure are they more or less popular that the rest of the group.
+
+##### Q7  find the top three songs in terms of number of plays for the 1990s.
+
+##### Q8 find the artist with the higest average playcount per year (all years)
+
+
+
+
