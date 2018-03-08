@@ -12,4 +12,5 @@ Compare the following model ability to predict class in the GermanCredit data, l
 {glm, randomforest, rpart}
 -Use AUC of the ROC to determine which model is best on five fold cross validation.
 -Test box cox and pca pre processing transforms
--Plot feature importance using the best model.
+-Create a signle plot with AUC curves for each model in different colors, and legned explaining
+which colors go with which models 
