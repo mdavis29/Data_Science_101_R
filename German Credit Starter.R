@@ -4,43 +4,33 @@ library(ROCR)
 data(GermanCredit)
 d = GermanCredit
 
+set.seed(2012)
+train_index = createDataPartition(d$Class, p =.2, list = FALSE)
+train_set = d[train_index,] 
+test_set = d[-train_index,]
 
 # create cntroller
 ctr <- trainControl(
   method = "cv",
-  number = 5,
-  search = 'random',
+  number = 4,
   classProbs = TRUE,
   summaryFunction = twoClassSummary)
 
 fit = train(Class~., 
-            data = d,
-            method = 'rpart',
-            trControl = ctr,
-            tuneLength = 1
-            #num_trees = 10
-)
-labels = ifelse(d$Class %in% 'Bad',1,0)
-preds = predict(fit, d, type = 'prob')[, 'Bad']
-p = prediction(preds, labels)
-perf = performance(p,  measure = "tpr", x.measure = "fpr")
-plot(perf, col=rainbow(10))
-abline(0,1)
-
-fit = train(Class~., 
-            data = d,
+            data = train_set,
             method = 'rf',
             trControl = ctr,
-            tuneLength = 1,
-            num_trees = 5
+            metric = 'ROC',
+            num_trees = 2
 )
-labels = ifelse(d$Class %in% 'Bad',1,0)
-preds = predict(fit, d, type = 'prob')[, 'Bad']
+labels = ifelse(test_set$Class %in% 'Bad',1,0)
+preds = predict(fit, test_set, type = 'prob')[, 'Bad']
 p = prediction(preds, labels)
 perf = performance(p,  measure = "tpr", x.measure = "fpr")
 lines(perf@x.values[[1]], perf@y.values[[1]], col='blue')
-
-
-legend('bottomright', fill = 'blue', legend=paste('RF Performance',round(fit$results['ROC'],3) ))
+plot(perf, col='blue')
+abline(0,1, col = 'red')
+auc = round(MLmetrics::AUC(preds, labels), 3)
+legend('bottomright', fill = 'blue', legend=paste('RF Performance',auc ))
 
 
