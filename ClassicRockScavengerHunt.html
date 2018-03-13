@@ -133,32 +133,77 @@ $(document).ready(function () {
 <li>Output is an html file to upload to oaks via R markdown. Answers should included the code used to generate.</li>
 <li>work must be your own by you are encouraged to work in groups</li>
 </ul>
+<pre class="r"><code>library(fivethirtyeight)
+data(&quot;classic_rock_song_list&quot;)
+d = as.data.frame(classic_rock_song_list)</code></pre>
 <div id="q1-which-aritist-has-the-song-with-highest-play-count-for-all-songs" class="section level5">
 <h5>Q1 Which aritist has the song with highest play count for all songs?</h5>
+<pre class="r"><code>d[d$playcount == max(d$playcount), 'artist']</code></pre>
+<pre><code>## [1] &quot;Aerosmith&quot;</code></pre>
 </div>
 <div id="q2-which-year-had-the-highest-average-play-count" class="section level5">
 <h5>Q2 Which year had the highest average play count?</h5>
+<pre class="r"><code>a = aggregate(d$playcount, by=list(d$artist),FUN = sum)
+a[a$x == max(a$x),1]</code></pre>
+<pre><code>## [1] &quot;Led Zeppelin&quot;</code></pre>
 </div>
 <div id="q3-find-the-artists-with-the-most-songs" class="section level5">
 <h5>Q3 Find the artists with the most songs</h5>
+<pre class="r"><code>names(table(d$artist)[table(d$artist) == max(table(d$artist))])</code></pre>
+<pre><code>## [1] &quot;The Beatles&quot;</code></pre>
 </div>
 <div id="q4-find-the-year-the-led-zeppelin-released-the-most-songs" class="section level5">
 <h5>Q4 Find the year the Led Zeppelin released the most songs?</h5>
+<pre class="r"><code>s = d[d$artist %in% 'Led Zeppelin','release_year']
+names(table(s)[table(s)==max(table(s))])</code></pre>
+<pre><code>## [1] &quot;1969&quot;</code></pre>
 </div>
 <div id="q4-find-the-one-hit-wonder-artist-with-the-largest-play-count-for-a-single-song" class="section level5">
 <h5>Q4 Find the one hit wonder artist with the largest play count for a single song</h5>
+<pre class="r"><code>one_hits_aritists = names(table(d$artist)[table(d$artist) ==1 ])
+s = d[d$artist %in% one_hits_aritists,]
+s[s$playcount == max(s$playcount), 'artist']</code></pre>
+<pre><code>## [1] &quot;Queen / David Bowie&quot;</code></pre>
 </div>
 <div id="q5-find-the-list-of-the-most-repeated-song-names" class="section level5">
 <h5>Q5 Find the list of the most repeated song names</h5>
+<pre class="r"><code>names(table(d$song)[table(d$song)&gt;2])</code></pre>
+<pre><code>## [1] &quot;Changes&quot;                       &quot;Don't Bring Me Down&quot;          
+## [3] &quot;Funk #49&quot;                      &quot;Knockin' On Heaven's Door&quot;    
+## [5] &quot;Loser&quot;                         &quot;Photograph&quot;                   
+## [7] &quot;Stop Draggin' My Heart Around&quot; &quot;Summertime Blues&quot;</code></pre>
 </div>
 <div id="q6-of-the-most-repeated-song-names-figure-are-they-more-or-less-popular-that-the-rest-of-the-group." class="section level5">
 <h5>Q6 Of the most repeated song names, figure are they more or less popular that the rest of the group.</h5>
+<pre class="r"><code>rep_songs = names(table(d$song)[table(d$song)&gt;1])
+rep_song_counts = d[d$song %in% rep_songs, 'playcount']
+once_song_counts  = d[!d$song %in% rep_songs, 'playcount']
+t.test(rep_song_counts, once_song_counts)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  rep_song_counts and once_song_counts
+## t = 1.1065, df = 149.24, p-value = 0.2703
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.155839  7.642855
+## sample estimates:
+## mean of x mean of y 
+##  19.45588  16.71237</code></pre>
 </div>
 <div id="q7-find-the-top-three-songs-in-terms-of-number-of-plays-for-the-1990s." class="section level5">
 <h5>Q7 find the top three songs in terms of number of plays for the 1990s.</h5>
+<pre class="r"><code>s = d[d$release_year %in% 1990:1999,]
+tail(s[order(s$playcount), 'song'],3)</code></pre>
+<pre><code>## [1] &quot;She Talks To Angels&quot;    &quot;Mary Jane's Last Dance&quot;
+## [3] &quot;Hard To Handle&quot;</code></pre>
 </div>
 <div id="q8-find-the-artist-with-the-higest-average-playcount-per-year-all-years" class="section level5">
 <h5>Q8 find the artist with the higest average playcount per year (all years)</h5>
+<pre class="r"><code>a = aggregate(d$playcount, by=list(d$artist),FUN = sum)
+a[a$x == max(a$x), 1]</code></pre>
+<pre><code>## [1] &quot;Led Zeppelin&quot;</code></pre>
+<p>[]</p>
 </div>
 
 

@@ -1,0 +1,96 @@
+---
+title: "Untitled"
+author: "Matthew Davis"
+date: "March 8, 2018"
+output: html_document
+---
+
+```{r pressure, message = FALSE}
+## German Credit Data Cheat sheat
+library(caret)
+library(ROCR)
+data(GermanCredit)
+d = GermanCredit
+
+set.seed(2012)
+train_index = createDataPartition(d$Class, p =.2, list = FALSE)
+train_set = d[train_index,] 
+test_set = d[-train_index,]
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r build rf model}
+# create cntroller
+ctr <- trainControl(
+  method = "cv",
+  number = 4,
+  classProbs = TRUE,
+  summaryFunction = twoClassSummary)
+
+fit_rf = train(Class~., 
+            data = train_set,
+            method = 'rf',
+            trControl = ctr,
+            metric = 'ROC',
+            num_trees = 2
+)
+
+fit_rpart = train(Class~., 
+            data = train_set,
+            method = 'rpart',
+            trControl = ctr,
+            metric = 'ROC'
+)
+
+fit_glm = train(Class~., 
+            data = train_set,
+            method = 'glm',
+            preProcess=c('zv', 'nzv','pca'),
+            trControl = ctr,
+            metric = 'ROC'
+)
+
+
+```
+
+
+
+
+
+```{r plot AUC}
+
+
+
+labels = ifelse(test_set$Class %in% 'Bad',1,0)
+preds_rf = predict(fit_rf, test_set, type = 'prob')[, 'Bad']
+preds_rpart = predict(fit_rpart, test_set, type = 'prob')[, 'Bad']
+preds_glm = predict(fit_glm, test_set, type = 'prob')[, 'Bad']
+```
+
+```{r}
+p = prediction(preds_rf, labels)
+perf_rf = performance(p,  measure = "tpr", x.measure = "fpr")
+
+p = prediction(preds_rpart, labels)
+perf_rpart = performance(p,  measure = "tpr", x.measure = "fpr")
+
+p = prediction(preds_glm, labels)
+perf_glm = performance(p,  measure = "tpr", x.measure = "fpr")
+
+```
+
+
+```{r}
+plot(perf_rf, col='blue')
+
+lines(perf_rpart@x.values[[1]], perf_rpart@y.values[[1]], col='red')
+lines(perf_glm@x.values[[1]], perf_glm@y.values[[1]], col='green')
+
+abline(0,1, col = 'red')
+auc = round(MLmetrics::AUC(preds, labels), 3)
+legend('bottomright', fill = 'blue', legend=paste('RF Performance',auc ))
+```
+

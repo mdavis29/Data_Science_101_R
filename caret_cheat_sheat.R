@@ -50,14 +50,40 @@ fit = train(Class~.,
 submission <- data.frame(PassengerId = test.set$PassengerId)
 test_features = create_features(test.set, xvars,  dmv, pp)
 submission$Survived <- predict(fit, test_features)
+
+
+
+
+
+
+
+
 write.csv(submission, file = "submission.csv", row.names=FALSE)
 
 
 
+#### GERMAN CREDIT EXAMPLE
 
 
+library(caret)
+data("GermanCredit")
+d =GermanCredit
 
+set.seed(2012)
+# create cntroller
+ctr <- trainControl(
+  method = "cv",
+  number = 5,
+  search = 'random',
+  classProbs = TRUE,
+  summaryFunction = twoClassSummary,
+  sample = 'smote')
 
-
+fit = train(Class~., 
+            data = d,
+            method = 'rpart',
+            trControl = ctr,
+            tuneLength = 1
+)
 
 

@@ -18,24 +18,66 @@ Rules:
 Answers should included the code used to generate.
 + work must be your own by you are encouraged to work in groups
 
-##### Q1 Which aritist has the song with highest play count for all songs?
+```{r}
+library(fivethirtyeight)
+data("classic_rock_song_list")
+d = as.data.frame(classic_rock_song_list)
 
+```
+##### Q1 Which aritist has the song with highest play count for all songs?
+```{r}
+d[d$playcount == max(d$playcount), 'artist']
+```
 ##### Q2 Which year had the highest average play count?
+```{r}
+a = aggregate(d$playcount, by=list(d$artist),FUN = sum)
+a[a$x == max(a$x),1]
+```
 
 ##### Q3  Find the artists with the most songs
+```{r}
+names(table(d$artist)[table(d$artist) == max(table(d$artist))])
+```
 
 ##### Q4  Find the year the Led Zeppelin released the most songs?
+```{r}
+s = d[d$artist %in% 'Led Zeppelin','release_year']
+names(table(s)[table(s)==max(table(s))])
+```
 
 ##### Q4 Find the one hit wonder artist with the largest play count for a single song
+```{r}
+one_hits_aritists = names(table(d$artist)[table(d$artist) ==1 ])
+s = d[d$artist %in% one_hits_aritists,]
+s[s$playcount == max(s$playcount), 'artist']
+```
 
 ##### Q5  Find the list of the most repeated song names
+```{r}
+names(table(d$song)[table(d$song)>2])
+
+```
 
 ##### Q6  Of the most repeated song names, figure are they more or less popular that the rest of the group.
+```{r}
+rep_songs = names(table(d$song)[table(d$song)>1])
+rep_song_counts = d[d$song %in% rep_songs, 'playcount']
+once_song_counts  = d[!d$song %in% rep_songs, 'playcount']
+t.test(rep_song_counts, once_song_counts)
+```
 
 ##### Q7  find the top three songs in terms of number of plays for the 1990s.
+```{r}
+s = d[d$release_year %in% 1990:1999,]
+tail(s[order(s$playcount), 'song'],3)
+```
 
 ##### Q8 find the artist with the higest average playcount per year (all years)
+```{r}
+a = aggregate(d$playcount, by=list(d$artist),FUN = sum)
+a[a$x == max(a$x), 1]
+```
 
 
 
-
+[]
