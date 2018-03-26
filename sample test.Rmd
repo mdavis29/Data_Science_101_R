@@ -1,0 +1,166 @@
+---
+title: "sample_test"
+author: "Matthew Davis"
+date: "March 25, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, comment = '')
+```
+
+### linear regression
+
+```{r}
+data(mtcars)
+summary(glm(mpg~cyl, data = mtcars, family = 'gaussian'))
+```
+
++ According to this model, a car with zero cylinders with be expected to have what mpg?
+
+_______________________________________________________________________________________
++ For every additional cylinder, what is the expected increase or decrease in mpg?
+
+_______________________________________________________________________________________
++ How do we know that number of cylinders is a significant predictor of mpg?
+
+_______________________________________________________________________________________
+
+#### Logistic Regression 
+
+notes: am	 Transmission (0 = automatic, 1 = manual)
+```{r}
+mtcars$over30mpg<-ifelse(mtcars$mpg>30, 1,0)
+summary(glm(over30mpg~am, data = mtcars))
+```
+
++ What are the odds that a car this an automatic transmission gets over 30mpg? 
+
+______________________________________________________________________________
++ What are the odds that car with a manual transmission gets over 30mpg?
+
+
+___________________________________________________________________________
+
+
+
+
+```{r, echo = F}
+par(mfrow = c(2,2))
+golden.ratio = (sqrt(5) + 1)/2
+fibonacci.angle=360/(golden.ratio^2)
+c=1
+num_points=630
+x=rep(0,num_points)
+y=rep(0,num_points)
+
+for (n in 1:num_points) {
+    r=c*sqrt(n)
+    theta=fibonacci.angle*(n)
+    x[n]=r*cos(theta)
+    y[n]=r*sin(theta)
+}
+plot(x,y,axes=FALSE,ann=FALSE,pch=1,cex=1)
+plot(rnorm(1000), rnorm(1000),  xlab = '1')
+plot(sample(1:100, 1000, replace=T), sample(1:100,1000, replace=T), xlab= '2')
+plot(1:10 + rnorm(1000), 1:10+ rnorm(1000), xlab = '4')
+```
+
++ Which Plot has the highest entropy?
+
+______________________________________________
+
++ Which has the lowest entropy?
+
+_____________________________________________
+
+### Data Splitting
+
+Why split data into training and test sets?
+
+_____________________________________________
+
+You have a deck of cards with only ten numbered cards.  You are trying to calculated the average of those cards and testing using 10 fold cross validation.  Describe how you would select cards for each fold?
+
+
+_____________________________________________
+
+You have a deck of cards with only ten numbered cards.  You are trying to calculated the average of those cards and using boot strap re sampling.  Describe how you would select cards for the training and test set?
+
+
+_____________________________________________
+
+You have a deck of cards with only ten numbered cards.  You are trying to calculated the average of those cards and using 25% holdout set.  Describe how you would select cards for the training and test set?
+
+### Trees
+
+How to decision tree use entropy to decide where to split variables?
+
+_____________________________________________
+
+
+What are the primary tuning parameters for a random forest model? What steps can be taken to reduce over fitting with a random forest model
+_____________________________________________
+
+
+Define the following parts of a decision tree: 
+
++ root:
++ node: 
++ leaf: 
+
+#### error metrics
+
+The following are error metrics of predictive models of a severely imbalanced data set:
++ model1: training-set: accuracy 99.9%, auc 0.5, test-set: accuracy 99.9%, auc 0.5
++ model2: training-set: accuracy 60% auc .6, test-set: accuracy 99.9%, auc 0.5
++ model3: training_set: accuracy 95% auc .92, test_set: accuracy 75.9%, auc 0.63
++ model4: training_set: accuracy 92% auc .85, test_set: accuracy 91%, auc 0.83
+
+* Which model is under fit?
+* Which model is over fit?
+* Which model learned a trivial solution?
+
+#### regression metrics
+
++ define RMSE:
++ define MSE:
+
+#### classificatio metrics
+
++ define AUC of the ROC:
++ define precision:
++ define recall:
++ define accuracy
+
+#### Over fitting
+
+What is over fitting and how can it be detected?
+
+#### Data Cleaning?
+
++ A data set has Null values in the independent variables?
+Name two different ways to deal the Null values and why one approach may be used vs another.  
+
+___________________________________________________
+
++ What is a categorical variable?
+
+___________________________________________________
+
++ What is an ordinal variable?
+
+___________________________________________________
+
+
++ What is a continuous variable?
+
+___________________________________________________
+
++ What is the difference between independent variables and dependent variables?
+
+___________________________________________________
+
+
+
+
