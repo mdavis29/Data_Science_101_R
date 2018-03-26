@@ -1,0 +1,37 @@
+#### Project Description:
+
+Using groups of size 2-4 create a predictive model, document it and create an operational dashboard using the model.  The data set to be used is:   
+https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection
+
+###### Deliverable 1: Predictive Model R markdown document including:
+  
+  htlm document generated with R mark down. Due Thursday April 5th
+  + AUC Curve Plot for training and test set generated with ggplot2
+  + feature importance bar plots generated with ggplot2
+  + Text description of the tenique used in final model
+  + Classification confusion matrix
+  + Evidence that two other models were tried and the final model had the best preformance.
+  + plot providing evidence that the optimim parameters were choosen for the model
+  Delevery method is an html or pdf file uploaded to oaks, as well as a screen shot showing a ranking score of an uploaded model on kaggle. 
+  
+###### Deliverable 2: Web Application Dashboard published on Tableau public. Due Thursday April 12th
+
+  + Build on raw data and predictions
+  + dashboard bar plot filterable by device and os ranking highest risk to the top.
+  + one additional dashboard, something that could be used operationally to find and describe fraud.
+  + Dashboards will be assed on three factors:
+    * Usablility and communication strength of the dashboard
+    * complexity of the build
+    * Astetics and creativity of the data presentation 
+  Dashboard delivery is to upload a working hyperlynk to the final dashboard published on tableau public.
+  
+###### Deliverable 3: Presentation to Class, Due be delivered Tuesday April 17th
+
+Presentations to the class, with critiques by industry representatives (hopefully).  Every team member must present a portion of the presenation. 
+  + 10 minute presentation to class via power point
+  + demonstrate Tableau app usablitly
+  + describe final model, building and selection process
+  
+  
+  
+  
