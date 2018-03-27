@@ -3,6 +3,8 @@
 Using groups of size 2-4 create a predictive model, document it and create an operational dashboard using the model.  The data set to be used is:   
 https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection
 
+Use train_sample.csv.zip as the training dataset (unless you have access to a 16gb + ram machine)
+
 ###### Deliverable 1: Predictive Model R markdown document including:
   
   htlm document generated with R mark down. Due Thursday April 5th

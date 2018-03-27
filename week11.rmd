@@ -1,0 +1,49 @@
+#### Week 11 
+##### Day1 
++ Review of neural networks
++ Annomolly Detection Systems
+* keams 
+* nnerual net autoencoders
+
+
+##### Day 2
++ Tableau Day
+
+##### Homework
+deploy a tableau dashboard with tableau public.  Upload screen shot of the dashboard to oaks.
+#### 
+```{r}
+library(fivethirtyeight)
+data('college_grad_students')
+d = college_recent_grads
+d = na.omit(d)
+features =   c('employed', 'employed_fulltime', 'employed_parttime')             
+fit <- kmeans(d[, features], 2)
+
+centers = fit$centers
+distance = function(x,y){
+  d = c()
+  for (i in 1:length(x)){
+    d = append(d, sqrt(x[i]^2+y[i]^2))
+  }
+  return(sum(d))
+}
+
+dist_mat = matrix(NA, nrow = nrow(d), ncol = nrow(centers))
+
+for ( i in 1:(nrow(d))){
+  for (j in 1:nrow(centers))
+    dist_mat[i,j]=distance(d[i, features], centers[j,] )
+    
+  }
+  
+d$distance = apply(dist_mat, 1, sum)
+
+# now package as a function
+
+```
+
+
+
+
+```
