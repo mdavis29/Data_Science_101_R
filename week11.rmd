@@ -7,11 +7,14 @@
 
 
 ##### Day 2 Tableau Day
-
+Topics
 + Data Sources and data types, Extracts, Tableau Data Sources, packaged workbooks.
 + Working with dates and time series data
 + fileters
-+ table 
++ table Caclulations
++ aggregation functions
+
+####### Plot Types
 + Bar plots
 + SCatter plots
 + Tree maps
