@@ -7,7 +7,7 @@ Use train_sample.csv.zip as the training dataset (unless you have access to a 16
 
 ###### Deliverable 1: Predictive Model R markdown document including:
   
-  htlm document generated with R mark down. Due Thursday April 5th
+  htlm document generated with R mark down. Due Friday April 6th
   + AUC Curve Plot for training and test set generated with ggplot2
   + feature importance bar plots generated with ggplot2
   + Text description of the tenique used in final model

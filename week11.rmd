@@ -6,11 +6,27 @@
 * nnerual net autoencoders
 
 
-##### Day 2
-+ Tableau Day
+##### Day 2 Tableau Day
+
++ Data Sources and data types, Extracts, Tableau Data Sources, packaged workbooks.
++ Working with dates and time series data
++ fileters
++ table 
++ Bar plots
++ SCatter plots
++ Tree maps
++ Geograhpic Maps
+
+
+Deliverables:
+Working filterable dashboard using Mother Jones Data
++ Dashboard must have all for plot types
 
 ##### Homework
 deploy a tableau dashboard with tableau public.  Upload screen shot of the dashboard to oaks.
+https://docs.google.com/spreadsheet/pub?key=0AswaDV9q95oZdG5fVGJTS25GQXhSTDFpZXE0RHhUdkE&output=csv
+
+
 #### 
 ```{r}
 library(fivethirtyeight)
@@ -46,4 +62,3 @@ d$distance = apply(dist_mat, 1, sum)
 
 
 
-```
