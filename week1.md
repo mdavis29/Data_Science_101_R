@@ -36,8 +36,8 @@ https://www.cs.auckland.ac.nz/courses/compsci367s1c/tutorials/IntroductionToWeka
 
 Due Next Week's class, grading is pass if completed, else fail.
 * Download and the software listed in the README (ie course Sylabus)
-* Create a model to using the built in Iris data set in the data folder to predict iris types.
-* upload to oaks a screen shot of the classifier output with the confusion matrix with a hand written text description of how the model works.  (Ensure 
+* Create a decision tree model to using the built in Iris data set in the data folder to predict iris types.
+* upload to oaks a screen shot of the classifier output with the confusion matrix with a hand written text description of how the model works.  (Ensure the model is small enought to actually describe)
 
 
 
