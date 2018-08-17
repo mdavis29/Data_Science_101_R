@@ -2,7 +2,7 @@
 
 #### Data Science 101, College of Charleston
 
-Spring 2018
+Fall 2018
 
 #### Official Course Description
 
@@ -11,23 +11,34 @@ Introduction to the use of computer based tools for the analysis of large data s
 ##### Required Text
 
 There is no required textbook to purchase for this course, but there will be a lot of required reading and online tutorials and guides. 
-Recommended book: Data Mining by Written and Frank.
-Power point deck for the book at  https://www.cs.waikato.ac.nz/~ml/weka/book.html
+Primary Source Matirial for the class can be found at 
+https://www.cs.waikato.ac.nz/~ml/weka/book.html
+http://www.rdatamining.com/
+
+optional book: Data Mining by Written and Frank.
 
 ##### Computing Requirments
+Access to a computer with at least 4gb of ram and the ability to install software (typically admin access). Only the open source and or publicaly availible versions are required, so there is no need to purchase software.  Software is availbile on Mac, Windows or Linux although installation steps vary. 
+Installation requirments included:
 
-Access to a computer with at least 4gb of ram and the ability to install software.
+* R  https://www.r-project.org/
+* R studio https://www.rstudio.com/products/RStudio/
+* Weka  https://www.cs.waikato.ac.nz/ml/weka/downloading.html  (note, it's usually easier to install java seperately)
+* Tableau Public https://public.tableau.com/en-us/s/
+
+Students will often need to bring a laptop to class 
+
 
 ##### Course Details
 
 Contact Information:
 
 *	Professor: Matthew Davis
-*	Office: Thursday 1700-1800
-*	Office Hours: … If you would like to use e-mail I will endeavor to respond within 48 hours.
+*	Office Hours:: Tuesday & Thursday 1730-1800 (in the class room)
 *	E-mail: davismc2@cofc.edu
 *	Office Phone: NA
-*	Course times and room: Thursday 1800 to 1915 pm
+*	Course times and room: Tuesday & Thursday 1800 to 1915
+ * Aug 21, 2018 - Dec 12, 2018 	
 
 ##### Course (learning) outcomes
 
