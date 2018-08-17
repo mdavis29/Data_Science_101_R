@@ -14,6 +14,7 @@ https://www.slideshare.net/Tommy96/crispdm-an-introduction
   * Domain Knowledge of the Subject
   
 ###### Core Concepts in Data Science
+Types of Models
 
 Supervised:  labels are known
   
@@ -34,9 +35,9 @@ https://www.cs.auckland.ac.nz/courses/compsci367s1c/tutorials/IntroductionToWeka
 ##### Homework
 
 Due Next Week's class, grading is pass if completed, else fail.
-* Download and install weka https://www.cs.waikato.ac.nz/ml/weka/
+* Download and the software listed in the README (ie course Sylabus)
 * Create a model to using the built in Iris data set in the data folder to predict iris types.
-* Bring a single page print out of the classifier output with the confusion matrix
+* upload to oaks a screen shot of the classifier output with the confusion matrix with a hand written text description of how the model works.  (Ensure 
 
 
 
