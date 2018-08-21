@@ -1,10 +1,13 @@
 ### Course Plan 1.11.2018
-
+#### Day 1
 * Introduction: Meet and Greet
 * Syllabus Introduction and discussion
 * CRISP DM Presentation:
+* Get to know you cluster 
 
 https://www.slideshare.net/Tommy96/crispdm-an-introduction
+
+* CRISP DM Activity
 
 ###### Keys for Success in Data Science
   
@@ -13,6 +16,7 @@ https://www.slideshare.net/Tommy96/crispdm-an-introduction
   * Knowledge of manipulated databases and data structures
   * Domain Knowledge of the Subject
   
+#### Day 2
 ###### Core Concepts in Data Science
 Types of Models
 
