@@ -59,3 +59,10 @@ Overall the main learning objective of the course is to give the students some e
 *	Homework - 10%
 *	Programming Assignments - 30%
 Grading 
+
+##### Note:
+weekly plan is suggect to change, and will likely be updated.  It is not advisabile to work ahead of the current week.
+
+#### Policies
+All relivent and or required policies from the College of Charleston are in effect and will be adhered to.
+http://eop.cofc.edu/policies-and-procedures/index.php
