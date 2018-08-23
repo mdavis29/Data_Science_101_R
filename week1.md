@@ -30,14 +30,16 @@ https://www.slideshare.net/Tommy96/crispdm-an-introduction
 ### Types of Models
 #### Supervised:  
 labels are known
+
 * Regression: predict a continuous variable, IE: predict commute time to work
     
     + linear models
     + NNet
     + tree based models
     + Nearest Neighbors
+ 
+ * Classification: predict a category, IE: predict whether a bank will default yes or no
     
-  * Classification: predict a category, IE: predict whether a bank will default yes or no
     + Logicistic Regression
     + SVM
     + NNnet
