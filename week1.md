@@ -59,6 +59,13 @@ labels are unknown, and natural patterns are used to determine labels
       + NNets 
  
 http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html 
+#### Very Basic Intro to Weka
++ Built in ARFF Data
++ Visualization Platform
++ Classifier
++ Cluster 
++ Association
+
 https://www.kdnuggets.com/2016/12/data-science-basics-types-patterns-mined-data.html
 
 ###### Weka Presentation:
