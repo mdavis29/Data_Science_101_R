@@ -18,19 +18,45 @@ https://www.slideshare.net/Tommy96/crispdm-an-introduction
   
 #### Day 2
 ###### Core Concepts in Data Science
-Types of Models
 
-Supervised:  labels are known
-  
-  * Regression: predict a continuous variable, IE: predict commute time to work
+* Types of Data:
+ + Numeric
+ + Catagorical
+ + Ordinal  
+ + text
+ + images
+ + videos
+
+### Types of Models
+#### Supervised:  
+labels are known
+* Regression: predict a continuous variable, IE: predict commute time to work
+    
+    + linear models
+    + NNet
+    + tree based models
+    + Nearest Neighbors
+    
   * Classification: predict a category, IE: predict whether a bank will default yes or no
-  
-Unsupervised = labels are unknown, and natural patterns are used to determine labels
-
-  * Clustering: find natural groupings of customers
-    + Mercerize with class number of years, programming vs number of years in college
-  * Association Learning: finds associated frequencies of categories, IE Netflix movie recommend
-  
+    + Logicistic Regression
+    + SVM
+    + NNnet
+    + trees
+    + Nearest Neighbors
+    + Rule Based Learners
+    
+#### Unsupervised
+labels are unknown, and natural patterns are used to determine labels
+  * Clustering
+    + Kmeans
+    + Hierarical Clustering
+    + Density Based Clustering
+  * NNets Autoencoders and Generatoaros
+  * Association Learning /  Market Basket Analysis
+      + Apriori association learning
+      + NNets 
+ 
+http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html 
 https://www.kdnuggets.com/2016/12/data-science-basics-types-patterns-mined-data.html
 
 ###### Weka Presentation:
