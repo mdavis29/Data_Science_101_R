@@ -17,9 +17,8 @@
   
 Slides at 
 https://elitedatascience.com/data-cleaning
-
+* Chicago SSL Demo 
 * Basic Data Cleaning 
-
   + Check Data Types
   + Delete ID Columns
   + Remove or Impute NAs
@@ -29,22 +28,18 @@ https://elitedatascience.com/data-cleaning
   + Remove zero or near zero variance varibles
   + Transform text columns using NLP 
   + Convert Dates to numeric format
-
-* Would you Survive the Titanic Model understanding Project.
   
-  + linreg for passenger ticket prices
-  + Basic Decision Tree
-  
-
+ 
 
 #### Course Plan Week 2 Day 2
-Chapter 4 Data Mining
-  + Cytoscape Netowk Demo
+Chapter 4 Data Mining  
+  + linreg for passenger ticket prices
+  + Basic Decision Tree
   + Review Data Cleaning
   + 1R Rule Learning on play tennis
   + Probability Density Function
-  + Nieve Bayes on tennis (if there is time)
-
+  + Niave Bayes on tennis (if there is time)
+* Would you Survive the Titanic Model understanding Project.
 
 #### Homework Week2
 
