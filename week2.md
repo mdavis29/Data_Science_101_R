@@ -33,7 +33,6 @@ https://elitedatascience.com/data-cleaning
 
 #### Course Plan Week 2 Day 2
 Chapter 4 Data Mining  
-  + linreg for passenger ticket prices
   + Basic Decision Tree
   + Review Data Cleaning
   + 1R Rule Learning on play tennis
