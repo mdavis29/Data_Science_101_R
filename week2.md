@@ -33,11 +33,11 @@ https://elitedatascience.com/data-cleaning
 
 #### Course Plan Week 2 Day 2
 Chapter 4 Data Mining  
-  + Basic Decision Tree
   + Review Data Cleaning
-  + 1R Rule Learning on play tennis
-  + Probability Density Function
-  + Niave Bayes on tennis (if there is time)
+  + 1R Rule System 
+  + Examply with height vs Gender 
+  + introduction to kaggle
+  + get data and setup project
 * Would you Survive the Titanic Model understanding Project.
 
 #### Homework Week2
@@ -45,7 +45,7 @@ Chapter 4 Data Mining
 Due first class of next week (week 3)
 
   * Find and read artical to share detailing how data science was used to solve a problem in your particular field of interest
-  * Use the titanic data set with weka decision trees or rules to find the pasenger types that would have most likely survived.  Write a paragraph on your method and what you found, as if you were explaining to your supervisor what the signifcant patterns in the data and how you used particular methods to find them.
+  * Use the titanic data set with weka decision trees or rules to find the pasenger types that would have most likely survived.  Write a paragraph on your method and what you found, as if you were explaining to your supervisor what the signifcant patterns in the data and how you used particular methods to find them. Model must excede the performance of 1r (78% accurcay)
 
 
 
