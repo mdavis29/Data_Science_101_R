@@ -34,6 +34,8 @@ https://elitedatascience.com/data-cleaning
 #### Course Plan Week 2 Day 2
 Chapter 4 Data Mining  
   + Review Data Cleaning
+  + Error as an error Metric: 
+  https://en.wikipedia.org/wiki/Receiver_operating_characteristic
   + 1R Rule System 
   https://www.cs.waikato.ac.nz/ml/weka/slides/Chapter4.pptx
   + Example with favorite Subject in HS vs Major is Computer Science
