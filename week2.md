@@ -36,9 +36,11 @@ Chapter 4 Data Mining
   + Review Data Cleaning
   + 1R Rule System 
   https://www.cs.waikato.ac.nz/ml/weka/slides/Chapter4.pptx
-  + Examply with height vs Gender 
+  + Example with favorite Subject in HS vs Major is Computer Science
+  + Example with height vs Gender 
   + introduction to kaggle
   + get data and setup project
+  
 * Would you Survive the Titanic Model understanding Project.
 
 #### Homework Week2
