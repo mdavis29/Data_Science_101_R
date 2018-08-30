@@ -35,6 +35,7 @@ https://elitedatascience.com/data-cleaning
 Chapter 4 Data Mining  
   + Review Data Cleaning
   + 1R Rule System 
+  https://www.cs.waikato.ac.nz/ml/weka/slides/Chapter4.pptx
   + Examply with height vs Gender 
   + introduction to kaggle
   + get data and setup project
