@@ -10,8 +10,15 @@
    + Buisness / Computer Science Majors vs 
    
 # Week 3 Day 2
-  * Review Decision Tree
-  * Nieave Bayes Classifcers
+  * Decison Tree Review
+  * Regression Metrics
+    + MSE ( example with num years in college model)
+    + SSE
+    + RMSE
+    + R2
+    + Cor
+    https://machinelearningmastery.com/machine-learning-evaluation-metrics-in-r/
+  * Regression Tree MSE Split Methodlology
   
 #### Homework
 
