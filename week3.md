@@ -27,3 +27,7 @@
   * Write an executive summary of the meta data of the, what modeling teqnique was used and for what
   purpose and key insights the model discovered. 
    
+#### resources
+Dr. Hilary Parker Blog
+https://hilaryparker.com/
+
