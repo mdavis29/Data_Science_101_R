@@ -19,11 +19,11 @@
     + Cor
     https://machinelearningmastery.com/machine-learning-evaluation-metrics-in-r/
   * Regression Tree MSE Split Methodlology
-  
+  * R Studio Setup wiht Git Integration
 #### Homework
 
-  * Choose and download a classification dataset from UCI Machine Repo or form Kaggle.
-  * create decision tree predicting the outcome
+  * Choose and download a classification dataset from UCI Machine Repo, Kaggle, data.gov, amazon open data or any other open source data dset
+  * create decision tree predicting an outcom
   * Write an executive summary of the meta data of the, what modeling teqnique was used and for what
   purpose and key insights the model discovered. 
    
