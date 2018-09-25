@@ -22,7 +22,7 @@ Introduction to R Continued
 ####  IN CLASS Activity
 Use college_recent_grads data set in fivethirteightpackage
  + find the top 5 most lucrative major catagories s
- + find the major with the largest gener pay inbalance
+ + find the major with the largest gender inbalance
  + find the top ten majors with the highest un employment rate
  + find the to 5 most popular majors
  + find the 
