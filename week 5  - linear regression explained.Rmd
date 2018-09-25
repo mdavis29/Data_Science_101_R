@@ -1,0 +1,132 @@
+---
+title: "Linear_Regression Explained"
+author: "Matthew Davis"
+date: "September 24, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.height = 3, fig.width = 3)
+```
+## Week 5 Day1
+### Basic Concept
+
+#### Why Linear Regression
+  * explainablity
+  * causaulity if and only if results are randomized trails
+  * magnitude of influence and standard error each variable
+  * considered gold standard in many fields
+  * significant p-values can turn into published papers
+  * computationally simply
+  * scalable when using gradient descent
+
+#### draw backs
+
+  * requires careful setup
+  * influenced in training and scoring by outliers
+  * not very powerful compaired to other methods
+  * assumptions are required are often limiting
+  * very easy to do poorly
+
+
+linear regression is try to fit a line throught a points of data.  There are many types of linear regression, but tyically OLS (ordinary least squares) is used for smaller data sets, a gradient descent regression  for massive data sets. Regression has assumptions that need to be true to also make conclusions draw from regression appropriated.
+
+http://people.duke.edu/~rnau/testing.htm
+
+
+#### Assumptions of Linear Regressioin
+
+* linearity and additivity of the relationship between dependent and independent variables:
+  + cannot have large correlations between variables
+  + relationships must fundamentally be linear
+  
+*  statistical independence of the errors (in particular, no correlation between consecutive errors in the case of time series data)
+  + a set of data points cannot be influenced by any other set of data points.
+
+* homoscedasticity (constant variance) of the errors
+  + variables have the same variance allong their sequences.
+  (example age vs income, folks in their 40s have a much hier variance in income than people in their teens, this would fail the assumption)
+
+* normality of the error distribution. 
+  + preds - actuals must be normally distributed with mean zero.
+    + This can be tested with shapiro test for normallity if required
+
+* Finally, linear regression analysis may be heaviliy influence by outliers.
+  + post plotting using cooks distance and influence can be used in most cases to identify
+  
+### how R solves linear regression via OLS matrix method
+https://web.stanford.edu/~mrosenfe/soc_meth_proj3/matrix_OLS_NYU_notes.pdf
+
+
+### How this method is typically done at scale using gradient descent
+
+https://machinelearningmastery.com/gradient-descent-for-machine-learning/
+
+### Setting up regression (for small data sets)
+* need 30+ data pints
+* look at distrobutions 
+* look at correlations
+* build and test a model, remove outliers if nessicary
+* y = mx + b 
+  + b is the value of y when x = 0
+  + m is the addative difference in y with an increase of 1 in x
+
+```{r}
+data(mtcars)
+d = mtcars
+plot(d$hp, d$mpg, xlim=c(0, max(d$hp)), ylim = c(0, max(d$mpg)), xlab='HP', ylab='mpg')
+f <- formula(mpg~hp)
+fit<-lm(f, d)
+abline(fit$coeff, col = 'red')
+summary(fit)
+
+```
+
+With factor variables 
+
+```{r}
+d = mtcars
+f <- formula(mpg~as.factor(am))
+fit<-lm(f, d)
+summary(fit)
+# the intercept
+b = mean(d[d$am == 0, 'mpg'])
+print(paste('the intercept: ', b))
+m = mean(d[d$am == 1, 'mpg']) - b
+print(paste('the slope: ', m))
+```
+
+
+
+
+
+
+```
+
+https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R
+
+
+* No Intercept Regression
+* Factor Based Regression
+* Interaction Based Regression
+
+
+* Outlier Detection
+* Plotting Resids
+* 
+  
+### Understanding Results
+* Coefficents for continous variables 
+* coefficents for factor varaibles
+* P-values 
+
+
+
+## Day 2 
+linear regression R markdown
+data set TBD
+
+
+
+
+
