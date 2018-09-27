@@ -1,0 +1,37 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+### Understanding us birth rates
+
+Using fivethirtyeight data set US_births_2000_2014. Provide the code to answer each question and knit to html markdown.   
+
+#### To what extent is the annual birth rate decreasing or increating? 
+
+#### What is the how many births you expect in 2018 ? (use linear models)
+
+#### what day of the week has the most births on average ? 
+
+#### what month has the most biths on average ? 
+
+#### what month/weekday has the most births on average ?
+
+#### When conisdering a model build on the interaction of month/weekday, which date is the the biggest outliers ? 
+
+#### generate a line plot of births vs date
+
+#### generate a barplot of sum of births by month
+
+
+example plot
+
+```{r}
+library(fivethirtyeight)
+library(ggplot2)
+
+d = US_births_2000_2014
+g = ggplot(d, aes(as.factor(year))) + geom_bar(aes(weight=births)) +
+  coord_flip()
+g
+
+```

@@ -75,7 +75,7 @@ https://machinelearningmastery.com/gradient-descent-for-machine-learning/
 data(mtcars)
 d = mtcars
 plot(d$hp, d$mpg, xlim=c(0, max(d$hp)), ylim = c(0, max(d$mpg)), xlab='HP', ylab='mpg')
-f <- formula(mpg~hp)
+f <- formula(mpg~hp + wt)
 fit<-lm(f, d)
 abline(fit$coeff, col = 'red')
 summary(fit)
@@ -86,7 +86,7 @@ With factor variables
 
 ```{r}
 d = mtcars
-f <- formula(mpg~as.factor(am))
+f <- formula(mpg~as.factor(am):as.factor(cyl))
 fit<-lm(f, d)
 summary(fit)
 # the intercept
