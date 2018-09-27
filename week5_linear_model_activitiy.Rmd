@@ -23,6 +23,7 @@ Using fivethirtyeight data set US_births_2000_2014. Provide the code to answer e
 #### generate a barplot of sum of births by month
 
 
+
 example plot
 
 ```{r}
@@ -33,5 +34,13 @@ d = US_births_2000_2014
 g = ggplot(d, aes(as.factor(year))) + geom_bar(aes(weight=births)) +
   coord_flip()
 g
+
+
+fit<-lm(births~year + as.factor(month):day_of_week, d)
+
+x = summary(fit)$coefficients
+x = x[x[,3] < .05,]
+x = x[order(x[,1]),]
+
 
 ```
