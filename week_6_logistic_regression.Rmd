@@ -1,0 +1,122 @@
+---
+title: "week_6_logistic_regression_explained"
+author: "Matthew Davis"
+date: "October 2, 2018"
+output: html_document
+---
+#### Logicistic regression with 
+to understand logist regressio, we must firest understand the difference between
+probability vs odds of an event
+
+probilibity is the ratio of the event occuring to the total number of events.
++ prob =  num times_event_occured / total_number_of_events
+* odds are the ratio of the event occuring to the event not occuring
++ ods = num times_event_occured / num_times_event didn't occure
+* total_number_of_events = num times_event_occured +  num_times_event didn't occure
+
+
+#### Assumptions of logistic regression
+* First, binary logistic regression requires the dependent variable to be binary and ordinal logistic regression requires the dependent variable to be ordinal.
+
+* Second, logistic regression requires the observations to be independent of each other.  In other words, the observations should not come from repeated measurements or matched data.
+
+* Third, logistic regression requires there to be little or no multicollinearity among the independent variables.  This means that the independent variables should not be too highly correlated with each other.
+
+* Fourth, logistic regression assumes linearity of independent variables and log odds.  although this analysis does not require the dependent and independent variables to be related linearly, it requires that the independent variables are linearly related to the log odds.
+
+* Finally, logistic regression typically requires a large sample size.  A general guideline is that you need at minimum of 10 cases with the least frequent outcome for each independent variable in your model. For example, if you have 5 independent variables and the expected probability of your least frequent outcome is .10, then you would need a minimum sample size of 500 (10*5 / .10).
+ 
+
+## logit Function
+https://web.stanford.edu/class/psych252/tutorials/Tutorial_LogisticRegression.html
+
+
+```{r}
+## generate a varaible to predict, in this case where the carget better than average mpg
+data(mtcars)
+d = mtcars
+d$class = ifelse(mtcars$mpg > mean(mtcars$mpg),1,0)
+
+```
+
+#### Logistict regression with factor variables
+
+```{r}
+
+fit<-glm(class~as.factor(vs), d, family = 'binomial')
+fit$coefficients
+
+
+b0 = log(sum(d$class ==1 & d$vs == 0)/sum(d$class == 0 & d$vs == 0))
+print(paste('intercept', b0))
+b1  = log(sum(d$class ==1 & d$vs == 1)/sum(d$class == 0 & d$vs == 1))
+print(paste('odd when vs == 1', b1))
+print(paste('coefficent', b1 - b0))
+```
+
+* This demonstrates the intercept at is the log odds of the event occuring in the data set, holding all other variables at zero.
+* The coefficeint is the addative odds increase when the even (on the independent x) side is True
+
+
+
+
+#### Logistic Regression with continous variables 
+attempts to fit log function using iteration
+
+```{r}
+plot(d$wt, d$class)
+fit<-glm(class~ wt, d, family = 'binomial')
+fit$coefficients
+# attepts to fit the logit function using interation 
+
+```
+
+
+#### Error Metrics
+https://www.dataschool.io/roc-curves-and-auc-explained/
+
+ROC curve has True Positives on y axis, false positives on x axis.
+
+AUC referes to the area under the ROC Curve, 1 being perfect and 0.5 being no better than a coin flip.
+
+ROC Demonstration
+```{r}
+preds = predict(fit,d,type="response")
+to_test = data.frame(preds=preds, true=d$class)
+to_test = to_test[order(to_test$preds),]
+to_test$pred_class = ifelse(to_test$preds >.5,1,0)
+```
+
+
+```{r}
+library(rocr)
+pred <- prediction(ROCR.simple$predictions,ROCR.simple$labels)
+```
+
+### Precision (PPV)
+
+Precision is the number of True Positives divided by the number of True Positives and False Positives. Put another way, it is the number of positive predictions divided by the total number of positive class values predicted. It is also called the Positive Predictive Value (PPV).It also can be thought of as the probability the model correctly assigns a positive label.
+
+
+#### Recall (Sensitivity) TPR
+
+Recall is the number of True Positives divided by the number of True Positives and the number of False Negatives. Put another way it is the number of positive predictions divided by the number of positive class values in the test data. It is also called Sensitivity or the True Positive Rate. It can be the thought of the probability that True positives are found
+
+#### Speficitiy Selectivity  TNR
+Recall is the number of True Negative divided by the number of True Negative and the number of False Positives. Put another way, it's the probability that the model correctly 
+correctly assigns a negative label
+
+```{r}
+TP = sum(to_test$pred_class == 1 & to_test$true == 1)
+FP = sum(to_test$pred_class == 1 & to_test$true == 0)
+FN = sum(to_test$pred_class == 0 & to_test$true == 1)
+TN = sum(to_test$pred_class == 0 & to_test$true == 0)
+print('precision: ')
+TP / (TP +FP)
+print('recall: ')
+TP / (TP + FN)
+print('Specificity')
+TN / (TN + FP)
+
+
+```
