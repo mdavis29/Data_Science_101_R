@@ -89,8 +89,14 @@ to_test$pred_class = ifelse(to_test$preds >.5,1,0)
 
 
 ```{r}
-library(rocr)
-pred <- prediction(ROCR.simple$predictions,ROCR.simple$labels)
+library(ggplot2)
+library(ROCR)
+p = ROCR::prediction(to_test$preds, to_test$true)
+perf = ROCR::performance(p)
+ggplot(df,aes(FPR,TPR,color=GeneSet))+geom_line(size = 2, alpha = 0.7)+
+      labs(title= "ROC curve", 
+           x = "False Positive Rate (1-Specificity)", 
+           y = "True Positive Rate (Sensitivity)")
 ```
 
 ### Precision (PPV)
