@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Matthew Davis" />
+
+
+<title>week6_Classic_Rock_Logistic_regresion</title>
+
+<script src="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fjquery%2D1%2E11%2E3%2Fjquery%2Emin%2Ejs%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fbootstrap%2D3%2E3%2E5%2Fcss%2Fbootstrap%2Emin%2Ecss%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A" rel="stylesheet" />
+<script src="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fbootstrap%2D3%2E3%2E5%2Fjs%2Fbootstrap%2Emin%2Ejs%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A"></script>
+<script src="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fbootstrap%2D3%2E3%2E5%2Fshim%2Fhtml5shiv%2Emin%2Ejs%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A"></script>
+<script src="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fbootstrap%2D3%2E3%2E5%2Fshim%2Frespond%2Emin%2Ejs%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A"></script>
+<script src="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fnavigation%2D1%2E1%2Ftabsets%2Ejs%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A"></script>
+<link href="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fhighlightjs%2Fdefault%2Ecss%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A" rel="stylesheet" />
+<script src="data:text/html; charset=iso-8859-1,%3C%21DOCTYPE%20HTML%20PUBLIC%20%22%2D%2F%2FIETF%2F%2FDTD%20HTML%202%2E0%2F%2FEN%22%3E%0A%3Chtml%3E%3Chead%3E%0A%3Ctitle%3E404%20Not%20Found%3C%2Ftitle%3E%0A%3C%2Fhead%3E%3Cbody%3E%0A%3Ch1%3ENot%20Found%3C%2Fh1%3E%0A%3Cp%3EThe%20requested%20URL%20%2Fhome31%2Fmad221%2FR%2Fwin%2Dlibrary%2F3%2E5%2Frmarkdown%2Frmd%2Fh%2Fhighlightjs%2Fhighlight%2Ejs%20was%20not%20found%20on%20this%20server%2E%3C%2Fp%3E%0A%3C%2Fbody%3E%3C%2Fhtml%3E%0A"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">week6_Classic_Rock_Logistic_regresion</h1>
+<h4 class="author"><em>Matthew Davis</em></h4>
+<h4 class="date"><em>October 4, 2018</em></h4>
+
+</div>
+
+
+<div id="classic-rock-scavenger-hunt-fall-2018" class="section level2">
+<h2>Classic Rock Scavenger Hunt Fall 2018</h2>
+<p>Answer the following the questions in an R Markdown knitted to html. Use the play_count variable inside the data set whenever play counts are referenced</p>
+<pre class="r"><code>library(fivethirtyeight)
+data(&quot;classic_rock_song_list&quot;)
+d = as.data.frame(classic_rock_song_list)</code></pre>
+<div id="plot-the-denisty-of-the-distrobutions-of-play-counts-with-a-red-vertial-line-regresenting-the-play-count-mean" class="section level4">
+<h4>Plot the denisty of the distrobutions of play counts, with a red vertial line regresenting the play count mean</h4>
+</div>
+<div id="which-aritist-has-the-song-with-highest-play-count-for-all-songs" class="section level4">
+<h4>Which aritist has the song with highest play count for all songs?</h4>
+<pre class="r"><code>d[d$playcount == max(d$playcount), 'artist']</code></pre>
+</div>
+<div id="which-year-had-the-highest-average-play-count" class="section level4">
+<h4>Which year had the highest average play count?</h4>
+</div>
+<div id="find-the-artists-with-the-most-songs" class="section level4">
+<h4>Find the artists with the most songs</h4>
+</div>
+<div id="create-a-variable-called-above_avg-inside-the-data-frame" class="section level4">
+<h4>Create a variable called above_avg inside the data frame</h4>
+<pre class="r"><code>ifelse(d$playcount &gt; mean(d$playcount) , 1, 0)
+d$above_avg = ifelse(d$playcount &gt; mean(d$playcount) , 1, 0)</code></pre>
+</div>
+<div id="what-is-increase-in-odds-that-a-song-has-above-average-plays-if-its-by-the-beatles-is-this-a-significant-increase-or-decrease" class="section level4">
+<h4>what is increase in odds that a song has above average plays if it’s by the beatles, is this a significant increase or decrease?</h4>
+</div>
+<div id="what-is-the-odds-increase-for-rolling-stones-is-this-a-significant-increase-or-decrease" class="section level4">
+<h4>what is the odds increase for “Rolling Stones”, is this a significant increase or decrease?</h4>
+</div>
+<div id="what-artis-has-the-most-significant-odds-increase-over-getting-a-song-with-more-than-average-plays-that-also-has-significant-results" class="section level4">
+<h4>what artis has the most significant odds increase over getting a song with more than average plays, that also has significant results</h4>
+</div>
+<div id="for-every-year-increase-what-are-the-odds-of-an-above-average-song-is-this-a-significant-result" class="section level4">
+<h4>for every year increase what are the odds of an above average song? Is this a significant result</h4>
+</div>
+<div id="plot-the-average-number-of-above-above-average-songs-per-year" class="section level4">
+<h4>plot the average number of above above average songs per year</h4>
+</div>
+<div id="what-does-your-what-can-you-conclude-from-your-plot-and-your-model-about-the-likely-hood-of-getting-a-song-in-the-future-with-above-average-plays" class="section level4">
+<h4>What does your what can you conclude from your plot and your model about the likely hood of getting a song in the future with above average plays?</h4>
+</div>
+<div id="fit-a-linear-regression-model-using-year-to-total-sum-number-of-plays.-how-many-classic-rock-plays-would-you-expect-in-2018" class="section level4">
+<h4>Fit a linear regression model using year to total sum number of plays. How many classic rock plays would you expect in 2018?</h4>
+</div>
+<div id="does-this-indicate-the-decline-of-classic-rock" class="section level4">
+<h4>Does this indicate the decline of classic rock ?</h4>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

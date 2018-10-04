@@ -1,0 +1,64 @@
+---
+title: "week6_Classic_Rock_Logistic_regresion"
+author: "Matthew Davis"
+date: "October 4, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Classic Rock Scavenger Hunt Fall 2018
+Answer the following the questions in an R Markdown knitted to html.  Use the play_count variable inside the data set whenever play counts are referenced
+
+```{r, eval=F}
+library(fivethirtyeight)
+data("classic_rock_song_list")
+d = as.data.frame(classic_rock_song_list)
+```
+
+#### Plot the denisty of the distrobutions of play counts, with a red vertial line regresenting the play count mean
+
+
+#### Which aritist has the song with highest play count for all songs?
+
+```{r, eval=F}
+d[d$playcount == max(d$playcount), 'artist']
+```
+
+####  Which year had the highest average play count?
+
+
+####   Find the artists with the most songs
+
+
+#### Create a variable called above_avg inside the data frame
+
+```{r, eval=F}
+ifelse(d$playcount > mean(d$playcount) , 1, 0)
+d$above_avg = ifelse(d$playcount > mean(d$playcount) , 1, 0)
+```
+
+#### what is increase in odds that a song has above average plays if it's by the beatles,  is this a significant increase or decrease? 
+
+
+#### what is the odds increase for "Rolling Stones", is this a significant increase or decrease? 
+
+
+#### what artis has the most significant odds increase over getting a song with more than average plays, that also has significant results
+
+
+#### for every year increase what are the odds of an above average song? Is this a significant result
+
+
+#### plot the average number of above above average songs per year
+
+
+#### What does your what can you conclude from your plot and your model about the likely hood of getting a song in the future with above average plays? 
+
+
+#### Fit a linear regression model using year to total sum number of plays. How many classic rock plays would you expect in 2018?
+
+
+#### Does this indicate the decline of classic rock ?
