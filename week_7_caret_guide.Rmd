@@ -1,0 +1,168 @@
+---
+title: "Caret From Start to Finish"
+author: "Matthew Davis"
+date: "October 9, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Caret from start to finisnh
+
+#### Loadling Data
+
+
+```{r}
+
+library(caret)
+library(ROCR)
+data(GermanCredit)
+d = GermanCredit
+```
+
+
+##### Pre Process with PCA
+principal component analysis
+
+https://georgemdallas.wordpress.com/2013/10/30/principal-component-analysis-4-dummies-eigenvectors-eigenvalues-and-dimension-reduction/
+
+* includes imputatation, removing all zero varience columns
+```{r}
+feature_names = colnames(d)[!colnames(d)=='Class']
+d[1,1] = NA
+d[2,2] = NA
+p = preProcess(d[, feature_names], method = c("medianImpute", "pca", 'zv'), pcaComp=4)
+
+x = predict(p,d[, feature_names] )
+y = d$Class
+
+````
+
+
+#### Data Splitting using a random hold out
+
+```{r}
+set.seed(2012)
+train_index = createDataPartition(d$Class, p =.2, list = FALSE)
+x_train = x[train_index,] 
+x_test = x[-train_index,]
+y_train = y[train_index]
+y_test = y[-train_index]
+```
+
+#### Setup a controller
+```{r}
+ctr <- trainControl(p=.8, classProbs = TRUE)
+
+```
+
+
+#### Build Model
+
+```{r}
+
+
+fit_glm = train(x=x_train, y=y_train,
+            trControl = ctr,
+            method = 'glm')
+fit_rpart= train(x=x_train, y=y_train,
+            trControl = ctr,
+            method = 'rpart')
+fit_rpart_tuned = train(x=x_train, y=y_train,
+            trControl = ctr,
+            method = 'rpart', tuneLength = 10)
+
+
+```
+
+
+#### Choose the best model
+```{r}
+
+resamps <- resamples(list(GLM=fit_glm, rpart=fit_rpart, rpart_tuned = fit_rpart_tuned))
+theme1 <- trellis.par.get()
+theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
+theme1$plot.symbol$pch = 16
+theme1$plot.line$col = rgb(1, 0, 0, .7)
+theme1$plot.line$lwd <- 2
+trellis.par.set(theme1)
+bwplot(resamps, layout = c(3, 1))
+```
+
+
+
+#### Using the the caret interface to get the model end to end in one call
+
+
+
+```{r}
+d = GermanCredit
+x = d[, feature_names] 
+y = d$Class
+
+ctr <- trainControl(method='cv',number = 3, classProbs = T, summaryFunction = twoClassSummary)
+fit_rpart_pca<-train(x, y, 
+           method = 'rpart',
+           trControl = ctr, 
+           tuneLength = 10, 
+           metric = 'ROC',
+           preProcess =  c( "medianImpute", "pca", 'zv'))
+
+fit_rpart <-train(x, y, 
+           method = 'rpart',
+           trControl = ctr, 
+           tuneLength = 10, 
+           metric = 'ROC',
+           preProcess =  c( "medianImpute", 'zv'))
+
+fit_glm_pca<-train(x, y, 
+           method = 'rpart',
+           trControl = ctr, 
+           metric = 'ROC',
+           preProcess =  c( "medianImpute", "pca", 'zv'))  
+
+fit_glm_scaled <-train(x, y, 
+           method = 'rpart',
+           trControl = ctr, 
+           metric = 'ROC',
+           preProcess =  c( "medianImpute",'zv'))     
+
+
+fit_glm<-train(x, y, 
+           method = 'rpart',
+           trControl = ctr, 
+           metric = 'ROC',
+           preProcess =  c( "medianImpute", "scale", 'zv'))     
+
+
+
+```
+
+
+```{r}
+resamps <- resamples(list(
+                          rpart=fit_rpart, 
+                          rpart_pca = fit_rpart_pca,
+                          glm_pca = fit_glm_pca,
+                          glm_scaled = fit_glm_scaled,
+                          glm = fit_glm
+                          ))
+theme1 <- trellis.par.get()
+theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
+theme1$plot.symbol$pch = 16
+theme1$plot.line$col = rgb(1, 0, 0, .7)
+theme1$plot.line$lwd <- 2
+trellis.par.set(theme1)
+bwplot(resamps, layout = c(3, 1))
+```
+```{r}
+
+
+imp <- varImp(fit_glm_scaled, scale = FALSE)
+plot(imp, top = 20)
+
+imp <- varImp(fit_rpart, scale = FALSE)
+plot(imp, top = 20)
+
+```
