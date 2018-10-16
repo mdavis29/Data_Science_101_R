@@ -19,6 +19,7 @@ library(caret)
 library(ROCR)
 data(GermanCredit)
 d = GermanCredit
+str(d)
 ```
 
 
@@ -36,7 +37,8 @@ p = preProcess(d[, feature_names], method = c("medianImpute", "pca", 'zv'), pcaC
 
 x = predict(p,d[, feature_names] )
 y = d$Class
-
+head(d[, feature_names])
+predict(p,d[1:6, feature_names] )
 ````
 
 
@@ -45,6 +47,7 @@ y = d$Class
 ```{r}
 set.seed(2012)
 train_index = createDataPartition(d$Class, p =.2, list = FALSE)
+head(train_index)
 x_train = x[train_index,] 
 x_test = x[-train_index,]
 y_train = y[train_index]
@@ -61,8 +64,6 @@ ctr <- trainControl(p=.8, classProbs = TRUE)
 #### Build Model
 
 ```{r}
-
-
 fit_glm = train(x=x_train, y=y_train,
             trControl = ctr,
             method = 'glm')
@@ -72,7 +73,7 @@ fit_rpart= train(x=x_train, y=y_train,
 fit_rpart_tuned = train(x=x_train, y=y_train,
             trControl = ctr,
             method = 'rpart', tuneLength = 10)
-
+predict(fit_rpart, x[1:10,], type = 'prob')
 
 ```
 
@@ -96,7 +97,7 @@ bwplot(resamps, layout = c(3, 1))
 
 
 
-```{r}
+```{r, message=F, echo=F}
 d = GermanCredit
 x = d[, feature_names] 
 y = d$Class
@@ -126,19 +127,31 @@ fit_glm_scaled <-train(x, y,
            method = 'rpart',
            trControl = ctr, 
            metric = 'ROC',
-           preProcess =  c( "medianImpute",'zv'))     
+           preProcess =  c( "medianImpute",'zv', "scale", 'center'))     
 
 
 fit_glm<-train(x, y, 
            method = 'rpart',
            trControl = ctr, 
            metric = 'ROC',
-           preProcess =  c( "medianImpute", "scale", 'zv'))     
+           preProcess =  c( "medianImpute", 'zv'))     
 
+fit_gbm<-train(x, y, 
+           method = 'gbm',
+           trControl = ctr, 
+           tuneLength = 3, 
+           metric = 'ROC',
+           preProcess =  c('zv', 'nzv'))
 
 
 ```
 
+
+
+```{r}
+
+
+```
 
 ```{r}
 resamps <- resamples(list(
@@ -146,7 +159,8 @@ resamps <- resamples(list(
                           rpart_pca = fit_rpart_pca,
                           glm_pca = fit_glm_pca,
                           glm_scaled = fit_glm_scaled,
-                          glm = fit_glm
+                          glm = fit_glm,
+                          gbm = fit_gbm
                           ))
 theme1 <- trellis.par.get()
 theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
@@ -158,6 +172,8 @@ bwplot(resamps, layout = c(3, 1))
 ```
 ```{r}
 
+imp <- varImp(fit_glm, scale = FALSE)
+plot(imp, top = 20)
 
 imp <- varImp(fit_glm_scaled, scale = FALSE)
 plot(imp, top = 20)
@@ -165,4 +181,39 @@ plot(imp, top = 20)
 imp <- varImp(fit_rpart, scale = FALSE)
 plot(imp, top = 20)
 
+```
+
+
+
+#### Lift Charts 
+```{r}
+
+lift_results = data.frame(Class = y, 
+                          rpart= predict(fit_rpart, x, type="prob")[,1],
+                          rpart_pca =predict( fit_rpart_pca, x, type="prob")[,1],
+                          glm_pca = predict(fit_glm_pca, x, type="prob")[,1],
+                          glm_scaled = predict(fit_glm_scaled, x, type="prob")[,1],
+                          glm = predict(fit_glm, x,type="prob")[,1],
+                          gbm = predict(fit_gbm, x,type="prob")[,1]
+                          
+                          )
+head(lift_results)
+
+trellis.par.set(caretTheme())
+lift_obj <- lift(Class ~rpart + rpart_pca +glm_pca  + glm_scaled + glm +gbm , data= lift_results)
+plot(lift_obj, values = 60, auto.key = list(columns = 3,
+                                            lines = TRUE,
+                                            points = FALSE))
+```
+
+
+```{r}
+resamps <- resamples(list(GLM=fit_glm, rpart=fit_rpart, rpart_tuned = fit_rpart_tuned, gbm =fit_gbm))
+theme1 <- trellis.par.get()
+theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
+theme1$plot.symbol$pch = 16
+theme1$plot.line$col = rgb(1, 0, 0, .7)
+theme1$plot.line$lwd <- 2
+trellis.par.set(theme1)
+bwplot(resamps, layout = c(3, 1))
 ```
