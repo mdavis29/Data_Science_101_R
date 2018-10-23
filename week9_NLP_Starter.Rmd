@@ -1,0 +1,95 @@
+### Week 9 
+Natural Language Processing 
+* Vocab
+https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html
+
+* Link to TM guide
+https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf
+
+## Generate data
+```{R}
+
+corpus = c('I want a cup of coffee', 
+         'please get me a coffee',
+         'please give me a cup of coffee' ,
+         'I hate coffee', 
+         'no thanks, I don not want a coffee right now',
+          'no coffee for me',
+         'I already had 1, thank you',
+         'more coffee please')
+labels = c(1,1,1,0,0,0,0,1)
+```
+
+### lower case everything
+```{r}
+library(tm)
+docs <- Corpus(VectorSource(corpus))
+docs <- tm_map(docs, content_transformer(tolower))
+inspect(docs)
+```
+
+
+### Remove Numbers
+```{r}
+docs <- tm_map(docs, removeNumbers)
+inspect(docs)
+```
+
+#### Remove Stop Words
+```{r}
+stopwords("english")
+docs <- tm_map(docs, removeWords, stopwords("english"))
+
+inspect(docs)
+```
+
+
+#### Eliminate extra white spaces
+```{r}
+docs <- tm_map(docs, stripWhitespace)
+
+inspect(docs)
+```
+
+```{r}
+# Text stemming (reduces words to their root form)
+library("SnowballC")
+docs <- tm_map(docs, stemDocument)
+
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+```
+
+
+```{r}
+x = t(m)
+x = data.frame(x)
+x$labels = labels
+fit <- glm(labels~., family = 'binomial', data=x)
+exp(coef(fit))
+```
+
+### Example of a fully form text preprocess function
+
+```{r}
+text_proc <- function(text){
+  library(tm)
+  library("SnowballC")
+  docs <- Corpus(VectorSource(corpus))
+  docs <- tm_map(docs, content_transformer(tolower))
+  docs <- tm_map(docs, removeWords, stopwords("english"))
+  docs <- tm_map(docs, removeNumbers)
+  docs <- tm_map(docs, stripWhitespace)
+  docs <- tm_map(docs, stemDocument)
+  dtm <- TermDocumentMatrix(docs)
+  m <- t(as.matrix(dtm))
+  return(m)
+  
+}
+text_proc(text)
+```
+
+
