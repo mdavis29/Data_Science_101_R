@@ -78,18 +78,21 @@ exp(coef(fit))
 text_proc <- function(text){
   library(tm)
   library("SnowballC")
-  docs <- Corpus(VectorSource(corpus))
-  docs <- tm_map(docs, content_transformer(tolower))
+  docs <- Corpus(VectorSource(c(corpus, text)))
+  docs <- tm_map(docs, tolower)
   docs <- tm_map(docs, removeWords, stopwords("english"))
   docs <- tm_map(docs, removeNumbers)
-  docs <- tm_map(docs, stripWhitespace)
   docs <- tm_map(docs, stemDocument)
   dtm <- TermDocumentMatrix(docs)
-  m <- t(as.matrix(dtm))
-  return(m)
-  
+  m <- data.frame(t(as.matrix(dtm)))
+  return(tail(m,1))
 }
-text_proc(text)
+```
+
+
+### test the prediction
+```{r}
+predict(fit, text_proc('please get me a coffee '), type='response')
 ```
 
 
