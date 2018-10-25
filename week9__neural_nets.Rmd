@@ -1,0 +1,133 @@
+---
+title: "week_9_intro to neual nets"
+author: "Matthew Davis"
+date: "October 25, 2018"
+output: html_document
+---
+#### Home work
+RUN MINTS Test Code, try different drop out values, number of layers, and number of nodes in each layer. Write a paragraph and upload to oaks on which combinations yield the best results, and which combinations lend themselves to over fitting.  Upload to oaks
+
+
+#### Introduction to Neural Networks with R, Keras and Tensorflow
+https://keras.rstudio.com/
+
+https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.77766&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false
+
+#### Feed Foreward Neural Networt Componets
+
+Layers
+
++ Input Layers
++ Output Layers 
++ Hidden Layers
++ Dropout Layers
+
+Activation Functions
+ + Relu
+ + tanh
+ + sigmoid
+
+
+Initializers: set wieghts randomly or by some other method
+
++ random normal
++ glorot_uniform (usually the best options)
+
+Loss Function : Calculate some sort of error that then passed back through all the weights and bias
+
++ MSE, logloss, binary crossentropy
+
+https://thelaziestprogrammer.com/sharrington/math-of-machine-learning/the-gradient-a-visual-descent
+
+
+
+Optimizer: Takes the loss per batch, and makes changes to all the weights 
+
++ stocastoic gradient descent
++ Adam
+
+
+Metrics
+
+
+#### Load Data 
+```{r}
+library(keras)
+mnist <- dataset_mnist()
+x_train <- mnist$train$x
+y_train <- mnist$train$y
+x_test <- mnist$test$x
+y_test <- mnist$test$y
+```
+
+#### Reshape the data
+
+```{r}
+# reshape
+x_train <- array_reshape(x_train, c(nrow(x_train), 784))
+x_test <- array_reshape(x_test, c(nrow(x_test), 784))
+# rescale
+x_train <- x_train / 255
+x_test <- x_test / 255
+```
+
+
+#### One Hot encode outcome variables
+```{r}
+y_train <- to_categorical(y_train, 10)
+y_test <- to_categorical(y_test, 10)
+```
+
+
+
+```{r}
+model <- keras_model_sequential() 
+model %>% 
+  layer_dense(units = 50, activation = 'relu', input_shape = c(784), kernel_initializer = "glorot_uniform") %>% 
+  layer_dropout(rate = 0.4) %>% 
+  layer_dense(units = 50, activation = 'relu') %>%
+  layer_dropout(rate = 0.3) %>%
+  layer_dense(units = 10, activation = 'softmax')
+summary(model)
+
+
+```
+
+#### Compile the model
+
+```{r}
+model %>% compile(
+  loss = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(),
+  metrics = c('accuracy')
+)
+```
+
+
+#### Fit the model
+
+
+
+```{r}
+
+history <- model %>% fit(
+  x_train, y_train, 
+  epochs = 3, batch_size = 500, 
+  validation_split = 0.2
+)
+
+```
+
+
+Keras has an awesome tokenizer
+```{r}
+toke = keras::text_tokenizer(4)
+text = c('this is my test text', 'hurray a good tokenizer to text')
+toke %>% fit_text_tokenizer(text)
+toke %>% texts_to_matrix(text,  mode = "binary")
+
+```
+
+
+
+
