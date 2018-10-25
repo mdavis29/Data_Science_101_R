@@ -16,13 +16,19 @@ corpus = c('I want a cup of coffee',
          'no thanks, I don not want a coffee right now',
           'no coffee for me',
          'I already had 1, thank you',
-         'more coffee please')
-labels = c(1,1,1,0,0,0,0,1)
+         'more coffee please',
+         'can I have a frapacino',
+         'can I get bagel',
+         'green tea latte please')
+labels = c(1,1,1,0,0,0,0,1,1,0,0 )
+length(labels)
+length(corpus)
 ```
 
 ### lower case everything
 ```{r}
 library(tm)
+print(corpus)
 docs <- Corpus(VectorSource(corpus))
 docs <- tm_map(docs, content_transformer(tolower))
 inspect(docs)
@@ -31,14 +37,15 @@ inspect(docs)
 
 ### Remove Numbers
 ```{r}
+inspect(docs)
 docs <- tm_map(docs, removeNumbers)
 inspect(docs)
 ```
 
 #### Remove Stop Words
 ```{r}
-stopwords("english")
-docs <- tm_map(docs, removeWords, stopwords("english"))
+#stopwords("english")
+docs <- tm_map(docs, removeWords, c('the', 'i'))
 
 inspect(docs)
 ```
@@ -53,20 +60,22 @@ inspect(docs)
 
 ```{r}
 # Text stemming (reduces words to their root form)
-library("SnowballC")
-docs <- tm_map(docs, stemDocument)
+#library("SnowballC")
+#docs <- tm_map(docs, stemDocument)
+#inspect(docs)
+```
+
+```{r}
 
 dtm <- TermDocumentMatrix(docs)
-m <- as.matrix(dtm)
-v <- sort(rowSums(m),decreasing=TRUE)
-d <- data.frame(word = names(v),freq=v)
-head(d, 10)
+m <- t(as.matrix(dtm))
+print(m)
 ```
 
 
 ```{r}
-x = t(m)
-x = data.frame(x)
+
+x = data.frame(m)
 x$labels = labels
 fit <- glm(labels~., family = 'binomial', data=x)
 exp(coef(fit))
@@ -80,19 +89,22 @@ text_proc <- function(text){
   library("SnowballC")
   docs <- Corpus(VectorSource(c(corpus, text)))
   docs <- tm_map(docs, tolower)
-  docs <- tm_map(docs, removeWords, stopwords("english"))
+  docs <- tm_map(docs, removeWords, c( 'the', 'i'))
   docs <- tm_map(docs, removeNumbers)
-  docs <- tm_map(docs, stemDocument)
   dtm <- TermDocumentMatrix(docs)
   m <- data.frame(t(as.matrix(dtm)))
   return(tail(m,1))
 }
+text_proc('this is my new coffee order unseen to the data set')
 ```
 
 
 ### test the prediction
 ```{r}
-predict(fit, text_proc('please get me a coffee '), type='response')
+z = text_proc('hate it at starbucks')
+
+predict(fit, z, type='response')
+predict(fit, z, type='response')
 ```
 
 
