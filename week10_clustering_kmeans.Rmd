@@ -1,0 +1,68 @@
+---
+title: "week10_clustering"
+author: "Matthew Davis"
+date: "October 29, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+references material
+https://www.datascience.com/blog/k-means-clustering
+
+
+
+## Custering with kmeans
+A  method for finding paterns in unsupervied data ( no outcome labels)
+
+### Objective
+to find which countries have similar drinking habbits
+
+
+#####
+* Kmeans start of with randomlly assigned custer centers
+* centers are updated at each step using a learning rate and the distance to the mean of their assigned cluster
+```{r}
+library(fivethirtyeight)
+library(ggplot2)
+data(drinks)
+d = drinks
+cols = c('beer_servings', 'spirit_servings') 
+d_s = scale(d[, cols])
+
+n_centers = 4
+
+set.seed(2012)
+fit<-kmeans(d_s, centers = n_centers, iter.max = i)
+d_w_centers = data.frame(d_s)
+d_w_centers$cluster = fit$cluster
+d_w_centers$type = 'data_points'
+d_w_centers$size = 1
+centers = data.frame(fit$centers)
+centers$cluster = 1:n_centers
+centers$type = 'center'
+centers$size =3
+d_w_centers = rbind(d_w_centers, centers)
+  ggplot(d_w_centers, aes(beer_servings,spirit_servings, color=as.factor(cluster)))+ geom_point(aes(shape=type, size=size))
+  
+
+
+```
+
+#### Investigate and Name Clusters
+
+
+```{r}
+d$cluster = as.factor(fit$cluster)
+levels(d$cluster) = c('beer drinkin', 'moderate', 'low consuption', 'booze')
+print(c(d[d$cluster == 'beer drinkin', 'country']))
+
+```
+
+### Example with Chicago Crime Data
+
+
+
