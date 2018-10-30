@@ -52,6 +52,24 @@ d_w_centers = rbind(d_w_centers, centers)
 
 ```
 
+### Choosing Clusters
+
+```{r}
+between = c()
+clusters =c()
+within = c()
+for(i in 2:10){
+  fit <-kmeans(d_s, i)
+  between = append(between, fit$betweenss)
+  within = append(within, fit$tot.withinss)
+  clusters = append(clusters, i)
+  }
+plot(clusters, between, type = 'l')
+plot(clusters, within, type = 'l')
+
+
+
+````
 #### Investigate and Name Clusters
 
 
@@ -63,6 +81,25 @@ print(c(d[d$cluster == 'beer drinkin', 'country']))
 ```
 
 ### Example with Chicago Crime Data
+ download the 2018 crime map
+
+https://data.cityofchicago.org/browse?q=crime&sortBy=relevance
+
+```{r load_data}
+d = read.csv('data/Crimes_-_Map.csv')
+d = na.omit(d)
+```
+
+```{r}
+x_cols = c('PRIMARY.DESCRIPTION','LATITUDE', 'LONGITUDE' )
+dmv = caret::dummyVars( ~PRIMARY.DESCRIPTION +  LATITUDE + LONGITUDE + 0, d)
+x = predict(dmv, d)
+fit<-kmeans(x[, x_cols[2:3]], centers = 4)
+
+a = aggregate(x, by=list(fit$cluster), FUN=sum)
+
+```
+
 
 
 
