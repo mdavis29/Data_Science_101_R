@@ -86,20 +86,52 @@ print(c(d[d$cluster == 'beer drinkin', 'country']))
 https://data.cityofchicago.org/browse?q=crime&sortBy=relevance
 
 ```{r load_data}
+library(caret)
 d = read.csv('data/Crimes_-_Map.csv')
 d = na.omit(d)
+dmv = caret::dummyVars( ~PRIMARY.DESCRIPTION +  LATITUDE + LONGITUDE + 0, d)
+x = predict(dmv, d)
 ```
 
 ```{r}
+
 x_cols = c('PRIMARY.DESCRIPTION','LATITUDE', 'LONGITUDE' )
 dmv = caret::dummyVars( ~PRIMARY.DESCRIPTION +  LATITUDE + LONGITUDE + 0, d)
 x = predict(dmv, d)
-fit<-kmeans(x[, x_cols[2:3]], centers = 4)
 
-a = aggregate(x, by=list(fit$cluster), FUN=sum)
+x = x[x[, 'PRIMARY.DESCRIPTION.MOTOR VEHICLE THEFT'] ==1 , ]
+x_scaled = scale(x[, x_cols[2:3]])
+fit<-kmeans(x_scaled, centers = 4)
 
+predict_kmeans <- function(fit, x){
+  n_centers = dim(fit$centers)[1]
+  n_rows = dim(x)[1]
+  output = matrix(NA, ncol = n_centers, nrow = n_rows)
+  for (i in i:n_centers){
+   output[,i] = apply(x[, colnames(fit$centers)], 1, FUN=function(x)(sqrt(sum(x, -fit$centers[i,])^2)))
+  }
+  
+  return(output)
+  }
+
+p = data.frame(predict_kmeans(fit, x_scaled))
+p$centers = apply(p,1, which.min)
+p = cbind(x[, x_cols[2:3] ], p)
+write.csv(p, 'car_theft.csv')
 ```
 
+#### Find the worst spot in all of chicago tpo park your car
+```{r}
+library(fle)
+dmv = caret::dummyVars( ~PRIMARY.DESCRIPTION +  LATITUDE + LONGITUDE + 0, d)
+x = predict(dmv, d)
+cols = c( 'LATITUDE', 'LONGITUDE')
+x_train = x[x[, 'PRIMARY.DESCRIPTION.MOTOR VEHICLE THEFT' ] == 1, cols]
+fit<-flexclust::kcca(x_train, 10)
+new_data= unique(d[, cols])
+preds = predict(fit, new_data)
 
+
+```
 
 
