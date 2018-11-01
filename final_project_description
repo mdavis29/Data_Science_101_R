@@ -1,22 +1,27 @@
 #### Project Description:
+Choose a publicly availible data set, at least 1000 rows of interest to your group.  The deliverables are as following. Groups should be no
+more than three students.  Feed back during the proposal phase should be incorporated into following deliverables
 
-Using groups of size 2-4 create a predictive model, document it and create an operational dashboard using the model.  The data set to be used is:   
-https://www.kaggle.com/c/talkingdata-adtracking-fraud-detection
 
-Use train_sample.csv.zip as the training dataset (unless you have access to a 16gb + ram machine)
+#### Deliverable 1: Project Proposal
+  + Written project prosal
+  + indentifies data source
+  + indentifies three questions to be answered using modeling
+  + proposes methods for answering the three questions
+  + indentifies audience the project is indended for (ie acidemic health researchers, or Iphone app designers)
 
-###### Deliverable 1: Predictive Model R markdown document including:
+###### Deliverable 2: Predictive Model R markdown document including:
   
-  htlm document generated with R mark down. Due Friday April 6th
+  htlm document generated with R mark down. Due Tuesday November 13th
   + AUC Curve Plot for training and test set generated with ggplot2
   + feature importance bar plots generated with ggplot2
   + Text description of the tenique used in final model
   + Classification confusion matrix
-  + Evidence that two other models were tried and the final model had the best preformance.
+  + Evidence that multple models were tried.
   + plot providing evidence that the optimim parameters were choosen for the model
   Delevery method is an html or pdf file uploaded to oaks, as well as a screen shot showing a ranking score of an uploaded model on kaggle. 
   
-###### Deliverable 2: Web Application Dashboard published on Tableau public. Due Thursday April 12th
+###### Deliverable 3: Web Application Dashboard published on Tableau public. Due Tuesday November 19th
 
   + Build on raw data and predictions
   + dashboard bar plot filterable by device and os ranking highest risk to the top.
@@ -27,12 +32,14 @@ Use train_sample.csv.zip as the training dataset (unless you have access to a 16
     * Astetics and creativity of the data presentation 
   Dashboard delivery is to upload a working hyperlynk to the final dashboard published on tableau public.
   
-###### Deliverable 3: Presentation to Class, Due be delivered Tuesday April 17th
+###### Deliverable 4: Presentation to Class, Due be delivered Tuesday November 27th
 
-Presentations to the class, with critiques by industry representatives (hopefully).  Every team member must present a portion of the presenation. 
+Presentations to the class, with critiques by industry representatives (hopefully).  
+Every team member must present a portion of the presenation. 
   + 10 minute presentation to class via power point
   + demonstrate Tableau app usablitly
   + describe final model, building and selection process
+
   
   
   
