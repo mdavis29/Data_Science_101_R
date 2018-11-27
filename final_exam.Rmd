@@ -13,7 +13,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, message = F, comment = '')
 ```
 Directions 
-please use the .rmd file as a templete upload to oaks a pdf, or word markdown document with the you answers to the uefollwoing questions.  All answers must be in your own words, not cut and pasted.  Working and groups as well as use of the internet for research is allowed, however each student must uniquely create their own answers.   Final exams are due to be uploaded no later than midnight December 4th.  
+please use the .rmd file as a templet to upload to oaks a pdf, or word markdown document with the you answers to the uefollwoing questions.  All answers must be in your own words, not cut and pasted.  Working and groups as well as use of the internet for research is allowed, however each student must uniquely create their own answers.   Final exams are due to be uploaded no later than midnight December 4th.  
 
 
 ### linear regression
@@ -23,7 +23,7 @@ data(mtcars)
 summary(glm(mpg~carb, data = mtcars, family = 'gaussian'))$coefficients
 ```
 
-+ According to this model, a car with zero cylinders with be expected to have what mpg?
++ According to this model, a car with zero carburators with be expected to have what mpg?
 
 
 _______________________________________________________________________________________
@@ -38,15 +38,8 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________
 
-+ Which Plot has the highest entropy?
 
 
-______________________________________________
-
-+ Which has the lowest entropy?
-
-
-_____________________________________________
 
 + Why is it impportant to split data into training and test set?
 
@@ -54,7 +47,7 @@ _____________________________________________
 
 _____________________________________________
 
-+ What is the difference between 10 fold cross validation and a random holdout when splitting data?
++ What is the difference between 10 fold cross validation and a random holdout when splitting data? Why would you use one vs the other?
 
 
 
@@ -130,14 +123,23 @@ ______________________________________________
 
 
 #### CRISP DM with respect to final project
-Write a paragraph describing in detail for each step of the CRISP-DM, the decisions and actions your team took to complete your final project. The CRisp-DM steps are as follows, please list at least two items for each step.
+Describe in detail for each step of the CRISP-DM, the decisions and actions your team took to complete your final project. The CRisp-DM steps are as follows, please write a few sentences for each bullet point.
 
 + Business Understanding 
 + Data Understanding 
-+ Data preparation
++ Data preparation/ Cleaning
 + Modeling 
 + Evaluation 
 + Deployment 
+
+
+
+
+
+
+
+
++ What was the biggest challenge in your final project, and how did you over come it?
 
 
 
